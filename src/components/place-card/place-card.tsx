@@ -1,5 +1,15 @@
 import {JSX} from 'react';
-import {PlaceCardProps} from '../props/place-card-props.ts';
+import {PlaceType} from '../../const.ts';
+
+type PlaceCardProps = {
+  image: string;
+  price: number;
+  description: string;
+  rating: string;
+  type: PlaceType;
+  isPremium?: boolean;
+  isInBookmarks?: boolean;
+}
 
 export function PlaceCard({
   image,

@@ -1,11 +1,19 @@
 import {JSX} from 'react';
-import {PlaceCard} from '../../components/place-card.tsx';
-import {PlaceType} from '../../props/place-card-props.ts';
-import {MainScreenProps} from '../../props/main-screen-props.ts';
+import {PlaceCard} from '../../components/place-card/place-card.tsx';
+import {PlaceType} from '../../const.ts';
+import {Helmet} from 'react-helmet-async';
+import {Offer} from '../../types/offer.ts';
 
-export function MainScreen({placeCount}: MainScreenProps): JSX.Element {
+type MainScreenProps = {
+  offers: Offer[];
+};
+
+export function MainScreen({offers}: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 sities</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -77,7 +85,7 @@ export function MainScreen({placeCount}: MainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placeCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>

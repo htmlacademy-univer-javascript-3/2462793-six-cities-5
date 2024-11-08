@@ -8,38 +8,41 @@ import {NotFoundScreen} from '../../pages/not-found-screen/not-found-screen.tsx'
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import {PrivateRoute} from '../private-route/private-route.tsx';
 import {FavoriteScreen} from '../../pages/favorites-screen/favorite-screen.tsx';
+import { Helmet } from 'react-helmet-async';
 
 export function App({placeCount}: MainScreenProps): React.JSX.Element {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={<MainScreen placeCount={placeCount}/>}
-        />
-        <Route
-          path={AppRoute.Login}
-          element={<LoginScreen />}
-        />
-        <Route
-          path={AppRoute.Offer}
-          element={<OfferScreen />}
-        />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
-            >
-              <FavoriteScreen />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='*'
-          element={<NotFoundScreen />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <Helmet>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={AppRoute.Main}
+            element={<MainScreen placeCount={placeCount}/>}
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<LoginScreen />}
+          />
+          <Route
+            path={AppRoute.Offer}
+            element={<OfferScreen />}
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute
+                authorizationStatus={AuthorizationStatus.NoAuth}
+              >
+                <FavoriteScreen />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='*'
+            element={<NotFoundScreen />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </Helmet>
   );
 }
