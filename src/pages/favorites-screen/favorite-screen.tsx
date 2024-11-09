@@ -21,9 +21,9 @@ export function FavoriteScreen({offers} : FavoriteScreenProps) : JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to={AppRoute.Main}>
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -71,7 +71,7 @@ export function FavoriteScreen({offers} : FavoriteScreenProps) : JSX.Element {
                                 <span>Premium</span>
                               </div>}
                             <div className="favorites__image-wrapper place-card__image-wrapper">
-                              <Link to={`${AppRoute.Offer}/${favorite.id}`}>
+                              <Link to={AppRoute.Offer.replace(':id', favorite.id)}>
                                 <img className="place-card__image" src={`/img/${favorite.imageSrc}`} width="150" height="110" alt="Place image"/>
                               </Link>
                             </div>
@@ -98,7 +98,7 @@ export function FavoriteScreen({offers} : FavoriteScreenProps) : JSX.Element {
                                 </div>
                               </div>
                               <h2 className="place-card__name">
-                                <Link to={`${AppRoute.Offer}/${favorite.id}`}>{favorite.title}</Link>
+                                <Link to={AppRoute.Offer.replace(':id', favorite.id)}>{favorite.title}</Link>
                               </h2>
                               <p className="place-card__type">
                                 {favorite.cardType}
