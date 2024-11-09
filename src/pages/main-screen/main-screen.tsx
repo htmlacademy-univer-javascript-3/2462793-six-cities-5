@@ -1,11 +1,22 @@
 import {JSX} from 'react';
-import {PlaceCard} from '../../components/place-card.tsx';
-import {PlaceType} from '../../props/place-card-props.ts';
-import {MainScreenProps} from '../../props/main-screen-props.ts';
+import {Helmet} from 'react-helmet-async';
+import {Offer} from '../../types/offer.ts';
+import {OffersList} from '../../components/offers-list/offers-list.tsx';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const.ts';
 
-export function MainScreen({placeCount}: MainScreenProps): JSX.Element {
+type MainScreenProps = {
+  offers: Offer[];
+};
+
+export function MainScreen({offers}: MainScreenProps): JSX.Element {
+  const favoritesCount = offers.filter((offer) => offer.isFavorite).length;
+
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 sities</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -17,12 +28,12 @@ export function MainScreen({placeCount}: MainScreenProps): JSX.Element {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
+                    <span className="header__favorite-count">{favoritesCount}</span>
+                  </Link>
                 </li>
                 <li className="header__nav-item">
                   <a className="header__nav-link" href="#">
@@ -77,7 +88,7 @@ export function MainScreen({placeCount}: MainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placeCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -93,13 +104,7 @@ export function MainScreen({placeCount}: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard image="apartment-01.jpg" price={120} description="Beautiful &amp; luxurious apartment at great location" rating="80%" type={PlaceType.Apartment} isPremium/>
-                <PlaceCard image="room.jpg" price={80} description="Wood and stone place" rating="80%" type={PlaceType.Room} isInBookmarks/>
-                <PlaceCard image="apartment-02.jpg" price={132} description="Canal View Prinsengracht" rating="80%" type={PlaceType.Apartment}/>
-                <PlaceCard image="apartment-03.jpg" price={180} description="Nice, cozy, warm big bed apartment" rating="100%" type={PlaceType.Apartment} isPremium/>
-                <PlaceCard image="room.jpg" price={80} description="Wood and stone place" rating="80%" type={PlaceType.Room} isInBookmarks/>
-              </div>
+              <OffersList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
