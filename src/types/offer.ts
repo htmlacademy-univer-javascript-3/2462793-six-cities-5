@@ -5,7 +5,7 @@ import {PlaceType} from '../const.ts';
 export type Offer = {
   id: string;
   title: string;
-  cardType: PlaceType;
+  type: PlaceType;
   price: number;
   city: City;
   location: Location;

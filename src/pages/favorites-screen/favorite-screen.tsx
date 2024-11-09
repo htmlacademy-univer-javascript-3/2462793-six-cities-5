@@ -101,7 +101,7 @@ export function FavoriteScreen({offers} : FavoriteScreenProps) : JSX.Element {
                                 <Link to={AppRoute.Offer.replace(':id', favorite.id)}>{favorite.title}</Link>
                               </h2>
                               <p className="place-card__type">
-                                {favorite.cardType}
+                                {favorite.type}
                               </p>
                             </div>
                           </article>

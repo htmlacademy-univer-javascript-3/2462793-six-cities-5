@@ -5,7 +5,7 @@ export const offers: Offer[] = [
   {
     'id': 'aaeb9d82-459d-48ca-8f44-518912791ff0',
     'title': 'Beautiful & luxurious apartment at great location',
-    'cardType': PlaceType.Apartment,
+    'type': PlaceType.Apartment,
     'price': 241,
     'imageSrc': 'apartment-01.jpg',
     'city': {
@@ -28,7 +28,7 @@ export const offers: Offer[] = [
   {
     'id': 'e50c65bc-1822-4ae8-9807-bb050b84e4fb',
     'title': 'Wood and stone place',
-    'cardType': PlaceType.Room,
+    'type': PlaceType.Room,
     'price': 286,
     'imageSrc': 'room.jpg',
     'city': {
@@ -51,7 +51,7 @@ export const offers: Offer[] = [
   {
     'id': '8ac1d09e-81da-444c-b8c4-04b2a4c3219a',
     'title': 'Canal View Prinsengracht',
-    'cardType': PlaceType.Apartment,
+    'type': PlaceType.Apartment,
     'price': 169,
     'imageSrc': 'apartment-02.jpg',
     'city': {
@@ -74,7 +74,7 @@ export const offers: Offer[] = [
   {
     'id': '5589a300-6208-4f52-908b-b8d348b0844e',
     'title': 'Nice, cozy, warm big bed apartment',
-    'cardType': PlaceType.Apartment,
+    'type': PlaceType.Apartment,
     'price': 469,
     'imageSrc': 'apartment-03.jpg',
     'city': {

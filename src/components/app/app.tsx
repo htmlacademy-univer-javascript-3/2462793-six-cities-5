@@ -10,13 +10,15 @@ import {FavoriteScreen} from '../../pages/favorites-screen/favorite-screen.tsx';
 import {HelmetProvider} from 'react-helmet-async';
 import {Offer} from '../../types/offer.ts';
 import {DetailOffer} from '../../types/detail-offer.ts';
+import {Review} from '../../types/review.ts';
 
 type AppProps = {
   offers: Offer[];
   detailOffers: DetailOffer[];
+  reviews: Review[];
 }
 
-export function App({offers, detailOffers}: AppProps): React.JSX.Element {
+export function App({offers, detailOffers, reviews}: AppProps): React.JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -31,7 +33,7 @@ export function App({offers, detailOffers}: AppProps): React.JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen offers={detailOffers}/>}
+            element={<OfferScreen offers={detailOffers} reviews={reviews}/>}
           />
           <Route
             path={AppRoute.Favorites}
