@@ -1,7 +1,7 @@
 import {DetailOffer} from '../types/detail-offer.ts';
 import {Cities, PlaceType} from '../const.ts';
 
-export const offersInDetails: DetailOffer[] = [
+export const detailOffers: DetailOffer[] = [
   {
     'id': 'e50c65bc-1822-4ae8-9807-bb050b84e4fb',
     'title': 'Wood and stone place',

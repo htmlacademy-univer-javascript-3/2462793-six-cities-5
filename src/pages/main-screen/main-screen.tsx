@@ -1,8 +1,7 @@
 import {JSX} from 'react';
-import {PlaceCard} from '../../components/place-card/place-card.tsx';
-import {PlaceType} from '../../const.ts';
 import {Helmet} from 'react-helmet-async';
 import {Offer} from '../../types/offer.ts';
+import {OffersList} from '../../components/offers-list/offers-list.tsx';
 
 type MainScreenProps = {
   offers: Offer[];
@@ -101,13 +100,7 @@ export function MainScreen({offers}: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard image="apartment-01.jpg" price={120} description="Beautiful &amp; luxurious apartment at great location" rating="80%" type={PlaceType.Apartment} isPremium/>
-                <PlaceCard image="room.jpg" price={80} description="Wood and stone place" rating="80%" type={PlaceType.Room} isInBookmarks/>
-                <PlaceCard image="apartment-02.jpg" price={132} description="Canal View Prinsengracht" rating="80%" type={PlaceType.Apartment}/>
-                <PlaceCard image="apartment-03.jpg" price={180} description="Nice, cozy, warm big bed apartment" rating="100%" type={PlaceType.Apartment} isPremium/>
-                <PlaceCard image="room.jpg" price={80} description="Wood and stone place" rating="80%" type={PlaceType.Room} isInBookmarks/>
-              </div>
+              <OffersList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

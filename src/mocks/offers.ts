@@ -7,7 +7,7 @@ export const offers: Offer[] = [
     'title': 'Beautiful & luxurious apartment at great location',
     'cardType': PlaceType.Apartment,
     'price': 241,
-    'imageSrc': 'https://14.design.htmlacademy.pro/static/hotel/13.jpg',
+    'imageSrc': 'apartment-01.jpg',
     'city': {
       'name': Cities.Amsterdam,
       'location': {
@@ -30,7 +30,7 @@ export const offers: Offer[] = [
     'title': 'Wood and stone place',
     'cardType': PlaceType.Room,
     'price': 286,
-    'imageSrc': 'img/room.jpg',
+    'imageSrc': 'room.jpg',
     'city': {
       'name': Cities.Amsterdam,
       'location': {
@@ -53,7 +53,7 @@ export const offers: Offer[] = [
     'title': 'Canal View Prinsengracht',
     'cardType': PlaceType.Apartment,
     'price': 169,
-    'imageSrc': 'img/apartment-02.jpg',
+    'imageSrc': 'apartment-02.jpg',
     'city': {
       'name': Cities.Amsterdam,
       'location': {
@@ -76,7 +76,7 @@ export const offers: Offer[] = [
     'title': 'Nice, cozy, warm big bed apartment',
     'cardType': PlaceType.Apartment,
     'price': 469,
-    'imageSrc': 'img/apartment-03.jpg',
+    'imageSrc': 'apartment-03.jpg',
     'city': {
       'name': Cities.Amsterdam,
       'location': {

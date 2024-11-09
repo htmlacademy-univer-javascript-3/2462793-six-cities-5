@@ -1,23 +1,29 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {MainScreen} from '../../pages/main-screen/main-screen.tsx';
-import {MainScreenProps} from '../../props/main-screen-props.ts';
 import {LoginScreen} from '../../pages/login-screen/login-screen.tsx';
 import {OfferScreen} from '../../pages/offer-screen/offer-screen.tsx';
 import {NotFoundScreen} from '../../pages/not-found-screen/not-found-screen.tsx';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import {PrivateRoute} from '../private-route/private-route.tsx';
 import {FavoriteScreen} from '../../pages/favorites-screen/favorite-screen.tsx';
-import { Helmet } from 'react-helmet-async';
+import {HelmetProvider} from 'react-helmet-async';
+import {Offer} from '../../types/offer.ts';
+import {DetailOffer} from '../../types/detail-offer.ts';
 
-export function App({placeCount}: MainScreenProps): React.JSX.Element {
+type AppProps = {
+  offers: Offer[];
+  detailOffers: DetailOffer[];
+}
+
+export function App({offers, detailOffers}: AppProps): React.JSX.Element {
   return (
-    <Helmet>
+    <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainScreen placeCount={placeCount}/>}
+            element={<MainScreen offers={offers}/>}
           />
           <Route
             path={AppRoute.Login}
@@ -25,15 +31,15 @@ export function App({placeCount}: MainScreenProps): React.JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen />}
+            element={<OfferScreen offers={detailOffers}/>}
           />
           <Route
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.NoAuth}
+                authorizationStatus={AuthorizationStatus.Auth}
               >
-                <FavoriteScreen />
+                <FavoriteScreen offers={offers} />
               </PrivateRoute>
             }
           />
@@ -43,6 +49,6 @@ export function App({placeCount}: MainScreenProps): React.JSX.Element {
           />
         </Routes>
       </BrowserRouter>
-    </Helmet>
+    </HelmetProvider>
   );
 }
