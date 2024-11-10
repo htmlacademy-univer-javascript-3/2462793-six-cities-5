@@ -4,6 +4,8 @@ import {Offer} from '../../types/offer.ts';
 import {OffersList} from '../../components/offers-list/offers-list.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
+import {useState} from 'react';
+import {Map} from '../../components/map/map.tsx';
 
 type MainScreenProps = {
   offers: Offer[];
@@ -11,6 +13,11 @@ type MainScreenProps = {
 
 export function MainScreen({offers}: MainScreenProps): JSX.Element {
   const favoritesCount = offers.filter((offer) => offer.isFavorite).length;
+
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+
+  const selectedOffer = offers.find((offer) => offer.id === activeOfferId);
+
 
   return (
     <div className="page page--gray page--main">
@@ -104,10 +111,14 @@ export function MainScreen({offers}: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={offers}/>
+              <OffersList offers={offers} onChange={setActiveOfferId}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                city={offers[0].city}
+                offers={offers}
+                selectedOffer={selectedOffer}
+              />
             </div>
           </div>
         </div>
