@@ -6,15 +6,19 @@ import {AppRoute} from '../../const.ts';
 import {Review} from '../../types/review.ts';
 import {ReviewItem} from '../../components/review-item/review-item.tsx';
 import ReviewForm from '../../components/review-form/review-form.tsx';
+import {Map} from '../../components/map/map.tsx';
+import {Offer} from '../../types/offer.ts';
 
 type OfferScreenProps = {
   offers: DetailOffer[];
   reviews: Review[];
+  nearOffers: Offer[];
 }
 
-export function OfferScreen({offers, reviews} : OfferScreenProps) : JSX.Element {
+export function OfferScreen({offers, reviews, nearOffers} : OfferScreenProps) : JSX.Element {
   const {id} = useParams();
   const offer = offers.find((item) => item.id === id);
+  const nearThreeOffers = nearOffers.filter((otherOffer) => otherOffer.id !== offer?.id).slice(0, 3);
 
   if (offer) {
     return (
@@ -147,7 +151,11 @@ export function OfferScreen({offers, reviews} : OfferScreenProps) : JSX.Element 
                 </section>
               </div>
             </div>
-            <section className="offer__map map"></section>
+            <Map
+              city={offer.city}
+              offers={nearThreeOffers}
+              selectedOffer={undefined}
+            />
           </section>
           <div className="container">
             <section className="near-places places">

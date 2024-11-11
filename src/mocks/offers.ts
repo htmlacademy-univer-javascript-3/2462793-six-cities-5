@@ -11,9 +11,9 @@ export const offers: Offer[] = [
     'city': {
       'name': Cities.Amsterdam,
       'location': {
-        'latitude': 52.37454,
-        'longitude': 4.897976,
-        'zoom': 13
+        'latitude': 52.3835,
+        'longitude': 4.8999,
+        'zoom': 12
       }
     },
     'location': {
@@ -34,9 +34,9 @@ export const offers: Offer[] = [
     'city': {
       'name': Cities.Amsterdam,
       'location': {
-        'latitude': 52.37454,
-        'longitude': 4.897976,
-        'zoom': 13
+        'latitude': 52.3835,
+        'longitude': 4.8999,
+        'zoom': 12
       }
     },
     'location': {
@@ -57,9 +57,9 @@ export const offers: Offer[] = [
     'city': {
       'name': Cities.Amsterdam,
       'location': {
-        'latitude': 52.37454,
-        'longitude': 4.897976,
-        'zoom': 13
+        'latitude': 52.3835,
+        'longitude': 4.8999,
+        'zoom': 12
       }
     },
     'location': {
@@ -80,9 +80,9 @@ export const offers: Offer[] = [
     'city': {
       'name': Cities.Amsterdam,
       'location': {
-        'latitude': 52.37454,
-        'longitude': 4.897976,
-        'zoom': 13
+        'latitude': 52.3835,
+        'longitude': 4.8999,
+        'zoom': 12
       }
     },
     'location': {

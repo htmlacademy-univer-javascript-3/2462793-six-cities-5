@@ -33,7 +33,7 @@ export function App({offers, detailOffers, reviews}: AppProps): React.JSX.Elemen
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen offers={detailOffers} reviews={reviews}/>}
+            element={<OfferScreen offers={detailOffers} reviews={reviews} nearOffers={offers}/>}
           />
           <Route
             path={AppRoute.Favorites}
