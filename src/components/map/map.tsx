@@ -22,7 +22,7 @@ export function Map({ city, offers, selectedOffer }: MapProps): JSX.Element {
 
       offers.forEach((offer) => {
         const marker = new Marker([offer.location.latitude, offer.location.longitude]);
-        
+
         marker.setIcon(
           selectedOffer && offer.id === selectedOffer.id
             ? currentCustomIcon

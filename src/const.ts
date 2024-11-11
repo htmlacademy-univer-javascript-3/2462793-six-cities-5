@@ -38,3 +38,7 @@ export const currentCustomIcon = new Icon({
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
+
+export const minCommentLength = 50;
+
+export const maxCommentLength = 300;
