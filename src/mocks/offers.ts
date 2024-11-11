@@ -11,14 +11,14 @@ export const offers: Offer[] = [
     'city': {
       'name': Cities.Amsterdam,
       'location': {
-        'latitude': 52.37454,
-        'longitude': 4.897976,
-        'zoom': 13
+        'latitude': 52.3835,
+        'longitude': 4.8999,
+        'zoom': 12
       }
     },
     'location': {
-      'latitude': 52.36554,
-      'longitude': 4.911976,
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
     'isFavorite': true,
@@ -34,14 +34,14 @@ export const offers: Offer[] = [
     'city': {
       'name': Cities.Amsterdam,
       'location': {
-        'latitude': 52.37454,
-        'longitude': 4.897976,
-        'zoom': 13
+        'latitude': 52.3835,
+        'longitude': 4.8999,
+        'zoom': 12
       }
     },
     'location': {
-      'latitude': 52.370540000000005,
-      'longitude': 4.9099759999999995,
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -57,14 +57,14 @@ export const offers: Offer[] = [
     'city': {
       'name': Cities.Amsterdam,
       'location': {
-        'latitude': 52.37454,
-        'longitude': 4.897976,
-        'zoom': 13
+        'latitude': 52.3835,
+        'longitude': 4.8999,
+        'zoom': 12
       }
     },
     'location': {
-      'latitude': 52.36354,
-      'longitude': 4.911976,
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -80,14 +80,14 @@ export const offers: Offer[] = [
     'city': {
       'name': Cities.Amsterdam,
       'location': {
-        'latitude': 52.37454,
-        'longitude': 4.897976,
-        'zoom': 13
+        'latitude': 52.3835,
+        'longitude': 4.8999,
+        'zoom': 12
       }
     },
     'location': {
-      'latitude': 52.385540000000006,
-      'longitude': 4.886976,
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
       'zoom': 16
     },
     'isFavorite': true,

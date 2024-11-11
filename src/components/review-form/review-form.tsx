@@ -1,12 +1,17 @@
-import React from 'react';
-import {JSX} from 'react';
+import React, {JSX} from 'react';
 import {useState} from 'react';
+import {minCommentLength, maxCommentLength} from '../../const.ts';
 
 export default function ReviewForm(): JSX.Element {
   const [formData, setFormData] = useState({
     review: '',
     rating: 0
   });
+
+  const isValid =
+    formData.review.length >= minCommentLength &&
+    formData.review.length <= maxCommentLength &&
+    formData.rating !== null;
 
   const handleFieldChange = (evt: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
@@ -39,9 +44,9 @@ export default function ReviewForm(): JSX.Element {
       <textarea className="reviews__textarea form__textarea" onChange={handleFieldChange} value={formData.review} id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"/>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{minCommentLength} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!isValid}>Submit</button>
       </div>
     </form>
   );
