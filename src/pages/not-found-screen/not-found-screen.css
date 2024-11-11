@@ -1,0 +1,30 @@
+.page-404 {
+  background-color: white;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-404 {
+  font-size: 72px;
+  width: 100%;
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+.text-not-found {
+  font-size: 56px;
+  width: 100%;
+  text-align: center;
+  margin: 0 0 40px;
+}
+
+.back-button {
+  color: white;
+  font-weight: 600;
+  background-color: #3069a6;
+  padding: 12px 20px;
+}
