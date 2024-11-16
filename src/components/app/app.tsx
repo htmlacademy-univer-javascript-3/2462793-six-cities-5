@@ -25,7 +25,7 @@ export function App({offers, detailOffers, reviews}: AppProps): React.JSX.Elemen
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainScreen offers={offers}/>}
+            element={<MainScreen/>}
           />
           <Route
             path={AppRoute.Login}

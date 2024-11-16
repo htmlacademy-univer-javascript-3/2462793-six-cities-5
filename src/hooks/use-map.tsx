@@ -7,7 +7,7 @@ export function useMap(mapRef: React.RefObject<HTMLElement>, city: City) {
   const isRenderedRef = useRef(false);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    if (mapRef.current && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: [city.location.latitude, city.location.longitude],
         zoom: city.location.zoom,
@@ -26,6 +26,12 @@ export function useMap(mapRef: React.RefObject<HTMLElement>, city: City) {
       isRenderedRef.current = true;
     }
   }, [mapRef, city]);
+
+  useEffect(() => {
+    if (map) {
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+    }
+  }, [map, city]);
 
   return map;
 }
