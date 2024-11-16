@@ -1,5 +1,5 @@
 import {DetailOffer} from '../types/detail-offer.ts';
-import {Cities, PlaceType} from '../const.ts';
+import {PlaceType} from '../const.ts';
 
 export const detailOffers: DetailOffer[] = [
   {
@@ -17,7 +17,7 @@ export const detailOffers: DetailOffer[] = [
       'https://14.design.htmlacademy.pro/static/hotel/10.jpg'
     ],
     'city': {
-      'name': Cities.Amsterdam,
+      'name': 'Amsterdam',
       'location': {
         'latitude': 52.37454,
         'longitude': 4.897976,
@@ -65,7 +65,7 @@ export const detailOffers: DetailOffer[] = [
       'https://14.design.htmlacademy.pro/static/hotel/10.jpg'
     ],
     'city': {
-      'name': Cities.Amsterdam,
+      'name': 'Amsterdam',
       'location': {
         'latitude': 52.37454,
         'longitude': 4.897976,
@@ -113,7 +113,7 @@ export const detailOffers: DetailOffer[] = [
       'https://14.design.htmlacademy.pro/static/hotel/10.jpg'
     ],
     'city': {
-      'name': Cities.Amsterdam,
+      'name': 'Amsterdam',
       'location': {
         'latitude': 52.37454,
         'longitude': 4.897976,
@@ -161,7 +161,7 @@ export const detailOffers: DetailOffer[] = [
       'https://14.design.htmlacademy.pro/static/hotel/10.jpg'
     ],
     'city': {
-      'name': Cities.Amsterdam,
+      'name': 'Amsterdam',
       'location': {
         'latitude': 52.37454,
         'longitude': 4.897976,

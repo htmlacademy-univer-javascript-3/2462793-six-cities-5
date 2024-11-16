@@ -1,23 +1,29 @@
 import {JSX} from 'react';
 import {Helmet} from 'react-helmet-async';
-import {Offer} from '../../types/offer.ts';
 import {OffersList} from '../../components/offers-list/offers-list.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
 import {useState} from 'react';
 import {Map} from '../../components/map/map.tsx';
+import {CitiesList} from '../../components/cities-list/cities-list.tsx';
+import {useAppSelector} from '../../hooks';
 
-type MainScreenProps = {
-  offers: Offer[];
-};
 
-export function MainScreen({offers}: MainScreenProps): JSX.Element {
+export function MainScreen(): JSX.Element {
+  const activeCity = useAppSelector((state) => state.activeCity);
+  const offers = useAppSelector((state) => state.offers).filter(
+    (offer) => offer.city.name === activeCity.name,
+  );
+
   const favoritesCount = offers.filter((offer) => offer.isFavorite).length;
 
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
   const selectedOffer = offers.find((offer) => offer.id === activeOfferId);
 
+  const placesFoundCaption = offers.length === 0
+    ? 'No places to stay available'
+    : `${offers.length} places to stay in ${activeCity.name}`;
 
   return (
     <div className="page page--gray page--main">
@@ -56,46 +62,13 @@ export function MainScreen({offers}: MainScreenProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+          <CitiesList activeCity={activeCity.name}/>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{placesFoundCaption}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -115,7 +88,7 @@ export function MainScreen({offers}: MainScreenProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <Map
-                city={offers[0].city}
+                city={activeCity}
                 offers={offers}
                 selectedOffer={selectedOffer}
               />

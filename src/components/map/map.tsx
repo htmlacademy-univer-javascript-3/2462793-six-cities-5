@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { JSX, useEffect, useRef } from 'react';
 import { Marker, layerGroup } from 'leaflet';
 import { City } from '../../types/city';
 import { Offer } from '../../types/offer';
