@@ -1,5 +1,6 @@
 import {Icon} from 'leaflet';
 import {City} from './types/city.ts';
+import {SortOption} from './types/sort-option.ts';
 
 export enum AppRoute {
   Main = '/',
@@ -20,13 +21,13 @@ export enum PlaceType {
 }
 
 export const defaultCustomIcon = new Icon({
-  iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+  iconUrl: 'public/img/pin.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
 export const currentCustomIcon = new Icon({
-  iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+  iconUrl: 'public/img/pin-active.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
@@ -34,13 +35,6 @@ export const currentCustomIcon = new Icon({
 export const minCommentLength = 50;
 
 export const maxCommentLength = 300;
-
-export enum sortOptions {
-  Popular = 'Popular',
-  Increasing = 'Price: low to high',
-  Decreasing = 'Price: high to low',
-  Rating = 'Top rated first',
-}
 
 export const Paris: City = {
   name: 'Paris',
@@ -103,4 +97,11 @@ export const Cities : City[] = [
   Amsterdam,
   Hamburg,
   Dusseldorf
+];
+
+export const sortOptions : SortOption[] = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first',
 ];
