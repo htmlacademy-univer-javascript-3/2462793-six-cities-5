@@ -84,7 +84,7 @@ export function OfferScreen() : JSX.Element {
             <div className="offer__container container">
               <div className="offer__wrapper">
                 <div className="offer__mark">
-                  <span>Premium</span>
+                  <span>{offer.isPremium}</span>
                 </div>
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">
