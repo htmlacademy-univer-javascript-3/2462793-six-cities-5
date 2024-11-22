@@ -12,5 +12,5 @@ export type Offer = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  imageSrc: string;
+  previewImage: string;
 };

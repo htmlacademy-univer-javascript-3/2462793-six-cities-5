@@ -9,6 +9,7 @@ import {Map} from '../../components/map/map.tsx';
 import {Offer} from '../../types/offer.ts';
 import {ReviewList} from '../../components/review-list/review-list.tsx';
 import {OffersList} from '../../components/offers-list/offers-list.tsx';
+import {useAppSelector} from '../../hooks';
 
 type OfferScreenProps = {
   offers: DetailOffer[];
@@ -16,10 +17,10 @@ type OfferScreenProps = {
   nearOffers: Offer[];
 }
 
-export function OfferScreen({offers, reviews, nearOffers} : OfferScreenProps) : JSX.Element {
+export function OfferScreen() : JSX.Element {
+  const detailOffers = useAppSelector(((state) => state.offers));
   const {id} = useParams();
-  const offer = offers.find((item) => item.id === id);
-  const nearThreeOffers = nearOffers.filter((otherOffer) => otherOffer.id !== offer?.id).slice(0, 3);
+  const offer = detailOffers.find((item) => item.id === id);
 
   if (offer) {
     return (
