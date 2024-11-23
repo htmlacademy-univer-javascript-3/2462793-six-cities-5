@@ -27,7 +27,7 @@ export function OfferScreen() : JSX.Element {
     3,
   );
   const reviews = useAppSelector((state) => state.reviews);
-  const favoriteCount = useAppSelector((state) => state.offers).filter((offer) => offer.isFavorite).length;
+  const favoriteCount = useAppSelector((state) => state.offers).filter((commonOffer) => commonOffer.isFavorite).length;
 
   if (offer === null){
     return (<Loading />);
