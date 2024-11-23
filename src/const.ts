@@ -10,9 +10,9 @@ export enum AppRoute {
 }
 
 export enum AuthorizationStatus {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
+  Authorized ,
+  Unauthorized ,
+  Unknown
 }
 
 export enum PlaceType {

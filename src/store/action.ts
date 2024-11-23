@@ -3,6 +3,7 @@ import {City} from '../types/city.ts';
 import {Offer} from '../types/offer.ts';
 import {DetailOffer} from '../types/detail-offer.ts';
 import {Review} from '../types/review.ts';
+import {AuthorizationStatus} from '../const.ts';
 
 export const changeActiveCity = createAction<City>('offers/changeActiveCity');
 
@@ -13,3 +14,5 @@ export const setDetailOffer = createAction<DetailOffer | null>('offers/setDetail
 export const setNearOffers = createAction<Offer[]>('offers/setNearOffers');
 
 export const setReviews = createAction<Review[]>('offers/setReviews');
+
+export const setAuthorizationStatus = createAction<AuthorizationStatus>('auth/setAuthorizationStatus');

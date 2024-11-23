@@ -27,6 +27,8 @@ export function OfferScreen() : JSX.Element {
     3,
   );
   const reviews = useAppSelector((state) => state.reviews);
+  const favoriteCount = useAppSelector((state) => state.offers).filter((offer) => offer.isFavorite).length;
+
   if (offer === null){
     return (<Loading />);
   }
@@ -48,12 +50,13 @@ export function OfferScreen() : JSX.Element {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <Link to={AppRoute.Main}>
                       <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                      <span className="header__favorite-count">3</span>
-                    </a>
+                    </Link>
+                    <Link to={AppRoute.Favorites}>
+                      <span className="header__favorite-count">{favoriteCount}</span>
+                    </Link>
                   </li>
                   <li className="header__nav-item">
                     <a className="header__nav-link" href="#">
