@@ -105,3 +105,11 @@ export const sortOptions : SortOption[] = [
   'Price: high to low',
   'Top rated first',
 ];
+
+export const apiRoute = {
+  offers: '/offers',
+  favorite: '/favorite',
+  login: '/login',
+  logout: '/logout',
+  reviews: '/comments'
+};

@@ -1,14 +1,12 @@
 import {JSX} from 'react';
 import {Helmet} from 'react-helmet-async';
-import {Offer} from '../../types/offer.ts';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
+import {useAppSelector} from '../../hooks';
 
-type FavoriteScreenProps = {
-  offers: Offer[];
-}
 
-export function FavoriteScreen({offers} : FavoriteScreenProps) : JSX.Element {
+export function FavoriteScreen() : JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const favorites = offers.filter((offer) => offer.isFavorite);
   const cities = Array.from(new Set(favorites.map((offer) => offer.city.name))).sort();
 
@@ -32,7 +30,7 @@ export function FavoriteScreen({offers} : FavoriteScreenProps) : JSX.Element {
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__favorite-count">{favorites.length}</span>
                   </a>
                 </li>
                 <li className="header__nav-item">
@@ -72,7 +70,7 @@ export function FavoriteScreen({offers} : FavoriteScreenProps) : JSX.Element {
                               </div>}
                             <div className="favorites__image-wrapper place-card__image-wrapper">
                               <Link to={AppRoute.Offer.replace(':id', favorite.id)}>
-                                <img className="place-card__image" src={`/img/${favorite.imageSrc}`} width="150" height="110" alt="Place image"/>
+                                <img className="place-card__image" src={favorite.previewImage} width="150" height="110" alt="Place image"/>
                               </Link>
                             </div>
                             <div className="favorites__card-info place-card__info">

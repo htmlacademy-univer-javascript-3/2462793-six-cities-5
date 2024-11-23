@@ -8,17 +8,8 @@ import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import {PrivateRoute} from '../private-route/private-route.tsx';
 import {FavoriteScreen} from '../../pages/favorites-screen/favorite-screen.tsx';
 import {HelmetProvider} from 'react-helmet-async';
-import {Offer} from '../../types/offer.ts';
-import {DetailOffer} from '../../types/detail-offer.ts';
-import {Review} from '../../types/review.ts';
 
-type AppProps = {
-  offers: Offer[];
-  detailOffers: DetailOffer[];
-  reviews: Review[];
-}
-
-export function App({offers, detailOffers, reviews}: AppProps): React.JSX.Element {
+export function App(): React.JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -33,7 +24,7 @@ export function App({offers, detailOffers, reviews}: AppProps): React.JSX.Elemen
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen offers={detailOffers} reviews={reviews} nearOffers={offers}/>}
+            element={<OfferScreen />}
           />
           <Route
             path={AppRoute.Favorites}
@@ -41,7 +32,7 @@ export function App({offers, detailOffers, reviews}: AppProps): React.JSX.Elemen
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth}
               >
-                <FavoriteScreen offers={offers} />
+                <FavoriteScreen />
               </PrivateRoute>
             }
           />
