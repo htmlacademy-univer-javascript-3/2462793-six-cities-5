@@ -1,6 +1,13 @@
-import {Paris} from '../const.ts';
+import {AuthorizationStatus, Paris} from '../const.ts';
 import {createReducer} from '@reduxjs/toolkit';
-import {changeActiveCity, setDetailOffer, setNearOffers, setOffers, setReviews} from './action.ts';
+import {
+  changeActiveCity,
+  setAuthorizationStatus,
+  setDetailOffer,
+  setNearOffers,
+  setOffers,
+  setReviews
+} from './action.ts';
 import {City} from '../types/city.ts';
 import {Offer} from '../types/offer.ts';
 import {DetailOffer} from '../types/detail-offer.ts';
@@ -12,6 +19,7 @@ type InitialState = {
   detailOffer: DetailOffer | null;
   nearOffers: Offer[];
   reviews: Review[];
+  authorizationStatus: AuthorizationStatus;
 }
 
 const initialState : InitialState = {
@@ -20,6 +28,7 @@ const initialState : InitialState = {
   detailOffer: null,
   nearOffers: [],
   reviews: [],
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -38,5 +47,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setReviews, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(setAuthorizationStatus, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
