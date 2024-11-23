@@ -12,11 +12,12 @@ import {City} from '../types/city.ts';
 import {Offer} from '../types/offer.ts';
 import {DetailOffer} from '../types/detail-offer.ts';
 import {Review} from '../types/review.ts';
+import {Nullable} from 'vitest';
 
 type InitialState = {
   activeCity: City;
   offers: Offer[];
-  detailOffer: DetailOffer | null;
+  detailOffer: Nullable<DetailOffer>;
   nearOffers: Offer[];
   reviews: Review[];
   authorizationStatus: AuthorizationStatus;
