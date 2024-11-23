@@ -27,6 +27,16 @@ export function App(): React.JSX.Element {
             element={<OfferScreen />}
           />
           <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute
+                authorizationStatus={AuthorizationStatus.Auth}
+              >
+                <FavoriteScreen />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path='*'
             element={<NotFoundScreen />}
           />

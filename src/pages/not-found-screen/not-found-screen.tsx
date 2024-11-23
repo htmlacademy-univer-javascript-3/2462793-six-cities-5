@@ -6,7 +6,7 @@ import './not-found-screen.css';
 
 export function NotFoundScreen() : JSX.Element {
   return (
-    <body className="page-400">
+    <div className="page-400">
       <Helmet>
         <title>6 sities: Page Not Found</title>
       </Helmet>
@@ -15,6 +15,6 @@ export function NotFoundScreen() : JSX.Element {
         <h2 className="text-not-found">Page Not Found</h2>
         <Link to={AppRoute.Main} className="back-button">Go back to Home</Link>
       </div>
-    </body>
+    </div>
   );
 }

@@ -111,5 +111,5 @@ export const apiRoute = {
   favorite: '/favorite',
   login: '/login',
   logout: '/logout',
-  reviews: '/comments/:offerId'
+  reviews: '/comments'
 };

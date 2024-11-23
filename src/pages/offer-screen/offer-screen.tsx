@@ -1,26 +1,35 @@
-import {JSX} from 'react';
+import {JSX, useEffect} from 'react';
 import {Helmet} from 'react-helmet-async';
-import {DetailOffer} from '../../types/detail-offer.ts';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
-import {Review} from '../../types/review.ts';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import {Map} from '../../components/map/map.tsx';
-import {Offer} from '../../types/offer.ts';
 import {ReviewList} from '../../components/review-list/review-list.tsx';
 import {OffersList} from '../../components/offers-list/offers-list.tsx';
 import {useAppSelector} from '../../hooks';
-
-type OfferScreenProps = {
-  offers: DetailOffer[];
-  reviews: Review[];
-  nearOffers: Offer[];
-}
+import {store} from '../../store';
+import {setDetailOffer} from '../../store/action.ts';
+import {fetchDetailOffer, fetchNearOffers, fetchReviews} from '../../store/api-actions.ts';
+import {Loading} from '../../components/loading/loading.tsx';
 
 export function OfferScreen() : JSX.Element {
-  const detailOffers = useAppSelector(((state) => state.offers));
   const {id} = useParams();
-  const offer = detailOffers.find((item) => item.id === id);
+  useEffect(() => {
+    store.dispatch(setDetailOffer(null));
+    store.dispatch(fetchDetailOffer(id!));
+    store.dispatch(fetchNearOffers(id!));
+    store.dispatch(fetchReviews(id!));
+  }, [id]);
+
+  const offer = useAppSelector((state) => state.detailOffer);
+  const nearOffers = useAppSelector((state) => state.nearOffers).slice(
+    0,
+    3,
+  );
+  const reviews = useAppSelector((state) => state.reviews);
+  if (offer === null){
+    return (<Loading />);
+  }
 
   if (offer) {
     return (
@@ -61,24 +70,11 @@ export function OfferScreen() : JSX.Element {
           <section className="offer">
             <div className="offer__gallery-container container">
               <div className="offer__gallery">
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/room.jpg" alt="Photo studio"/>
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio"/>
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio"/>
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio"/>
-                </div>
-                <div className="offer__image-wrapper">
-                  <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-                </div>
+                {offer.images.map((image, index) => (
+                  <div key={image} className="offer__image-wrapper">
+                    <img className="offer__image" src={image} alt={`Photo ${index + 1}`}/>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="offer__container container">
@@ -90,7 +86,10 @@ export function OfferScreen() : JSX.Element {
                   <h1 className="offer__name">
                     {offer.title}
                   </h1>
-                  <button className={`offer__bookmark-button ${offer.isFavorite && 'offer__bookmark-button--active'} button`} type="button">
+                  <button
+                    className={`offer__bookmark-button ${offer.isFavorite && 'offer__bookmark-button--active'} button`}
+                    type="button"
+                  >
                     <svg className="offer__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -112,7 +111,7 @@ export function OfferScreen() : JSX.Element {
                     {offer.bedrooms} Bedrooms
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {offer.maxAdults} adults
+                      Max {offer.maxAdults} adults
                   </li>
                 </ul>
                 <div className="offer__price">
@@ -133,7 +132,9 @@ export function OfferScreen() : JSX.Element {
                   <h2 className="offer__host-title">Meet the host</h2>
                   <div className="offer__host-user user">
                     <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
+                      <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74"
+                        alt="Host avatar"
+                      />
                     </div>
                     <span className="offer__user-name">
                       {offer.host.name}
@@ -157,7 +158,7 @@ export function OfferScreen() : JSX.Element {
             </div>
             <Map
               city={offer.city}
-              offers={nearThreeOffers}
+              offers={nearOffers}
               selectedOffer={undefined}
             />
           </section>
@@ -165,7 +166,7 @@ export function OfferScreen() : JSX.Element {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <OffersList offers={nearThreeOffers} onChange={() => {}} />
+                <OffersList offers={nearOffers} onChange={() => {}} />
               </div>
             </section>
           </div>
