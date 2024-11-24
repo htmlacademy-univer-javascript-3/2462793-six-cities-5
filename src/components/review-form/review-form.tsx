@@ -1,12 +1,27 @@
 import React, {JSX} from 'react';
 import {useState} from 'react';
 import {minCommentLength, maxCommentLength} from '../../const.ts';
+import {store} from '../../store';
+import {sendReview} from '../../store/api-actions.ts';
+import {useAppSelector} from '../../hooks';
 
 export default function ReviewForm(): JSX.Element {
   const [formData, setFormData] = useState({
     review: '',
     rating: 0
   });
+
+  const offerId = useAppSelector((state) => state.detailOffer)!.id;
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (evt) => {
+    evt.preventDefault();
+    store.dispatch(
+      sendReview({
+        offerId,
+        rating: formData.rating,
+        comment: formData.review,
+      }),
+    );
+  };
 
   const isValid =
     formData.review.length >= minCommentLength &&
@@ -32,7 +47,7 @@ export default function ReviewForm(): JSX.Element {
   }
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {renderRatingInput(5, 'perfect')}
@@ -46,7 +61,12 @@ export default function ReviewForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{minCommentLength} characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!isValid}>Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={!isValid}
+        >Submit
+        </button>
       </div>
     </form>
   );

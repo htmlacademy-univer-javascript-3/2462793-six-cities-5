@@ -15,8 +15,7 @@ export function LoginScreen() : JSX.Element {
   const submitHandle = (evt: FormEvent) => {
     evt.preventDefault();
     store.dispatch(login(loginInfo));
-    console.log(loginInfo)
-  }
+  };
 
   return (
     <div className="page page--gray page--login">
@@ -51,9 +50,9 @@ export function LoginScreen() : JSX.Element {
                     setLoginInfo({
                       ...loginInfo,
                       email: event.target.value
-                    })
-                  }
-                  required/>
+                    })}
+                  required
+                />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
@@ -66,9 +65,9 @@ export function LoginScreen() : JSX.Element {
                     setLoginInfo({
                       ...loginInfo,
                       password: event.target.value
-                    })
-                  }
-                  required/>
+                    })}
+                  required
+                />
               </div>
               <button
                 className="login__submit form__submit button"

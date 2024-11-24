@@ -1,7 +1,7 @@
 import {JSX, useEffect} from 'react';
 import {Helmet} from 'react-helmet-async';
 import {Link, Navigate, useParams} from 'react-router-dom';
-import {AppRoute} from '../../const.ts';
+import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import ReviewForm from '../../components/review-form/review-form.tsx';
 import {Map} from '../../components/map/map.tsx';
 import {ReviewList} from '../../components/review-list/review-list.tsx';
@@ -28,6 +28,7 @@ export function OfferScreen() : JSX.Element {
   );
   const reviews = useAppSelector((state) => state.reviews);
   const favoriteCount = useAppSelector((state) => state.offers).filter((commonOffer) => commonOffer.isFavorite).length;
+  const isAuth = useAppSelector((state) => state.authorizationStatus) === AuthorizationStatus.Authorized;
 
   if (offer === null){
     return (<Loading />);
@@ -158,7 +159,7 @@ export function OfferScreen() : JSX.Element {
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewList reviews={reviews} />
-                <ReviewForm />
+                {isAuth && <ReviewForm/>}
               </section>
             </div>
           </div>
