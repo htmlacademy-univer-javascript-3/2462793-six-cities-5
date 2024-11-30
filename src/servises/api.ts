@@ -1,7 +1,7 @@
 import axios, {AxiosError, AxiosInstance, InternalAxiosRequestConfig} from 'axios';
 import {getToken} from './token.ts';
 import {store} from '../store';
-import {setAuthorizationStatus} from '../store/action.ts';
+import {setAuthorizationStatus, setDetailOffer} from '../store/action.ts';
 import {AuthorizationStatus} from '../const.ts';
 
 const baseURL = 'https://14.design.htmlacademy.pro/six-cities';
@@ -37,6 +37,9 @@ export const createAPI = () : AxiosInstance => {
         store.dispatch(
           setAuthorizationStatus(AuthorizationStatus.Unauthorized),
         );
+      }
+      if (error.response && error.response.status === 404) {
+        store.dispatch(setDetailOffer(undefined));
       }
       throw error;
     },

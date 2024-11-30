@@ -11,7 +11,7 @@ export function PrivateRouteAuthorized(props: PrivateRouteProps): JSX.Element {
   const {children} = props;
   const isAuthorized = useAppSelector((state) => state.authorizationStatus) === AuthorizationStatus.Authorized;
   return (
-      isAuthorized
+    isAuthorized
       ? children
       : <Navigate to={AppRoute.Login} />
   );
