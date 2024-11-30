@@ -20,7 +20,9 @@ export default function ReviewForm(): JSX.Element {
         rating: formData.rating,
         comment: formData.review,
       }),
-    );
+    ).then(() => {
+      setFormData({rating: 0, review: ''});
+    });
   };
 
   const isValid =
@@ -28,15 +30,26 @@ export default function ReviewForm(): JSX.Element {
     formData.review.length <= maxCommentLength &&
     formData.rating !== null;
 
-  const handleFieldChange = (evt: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
-    const {name, value} = evt.target;
-    setFormData({...formData, [name]: value});
+  const handleFieldChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = evt.target;
+    setFormData({
+      ...formData,
+      [name]: name === 'rating' ? Number(value) : value,
+    });
   };
 
   function renderRatingInput(value: number, title: string) {
     return (
       <>
-        <input className="form__rating-input visually-hidden" onChange={handleFieldChange} name="rating" value={value} id={`${value}-stars`} type="radio" />
+        <input
+          className="form__rating-input visually-hidden"
+          onChange={handleFieldChange}
+          name="rating"
+          value={value}
+          id={`${value}-stars`}
+          type="radio"
+          checked={formData.rating === value}
+        />
         <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>

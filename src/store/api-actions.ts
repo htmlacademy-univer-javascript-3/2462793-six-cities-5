@@ -3,10 +3,10 @@ import {AppDispatch, State} from '../types/state.ts';
 import {AxiosInstance} from 'axios';
 import {Offer} from '../types/offer.ts';
 import {apiRoute, AuthorizationStatus} from '../const.ts';
-import {setOffers, setDetailOffer, setNearOffers, setReviews, setAuthorizationStatus} from './action.ts';
+import {setAuthorizationStatus, setDetailOffer, setNearOffers, setOffers, setReviews} from './action.ts';
 import {DetailOffer} from '../types/detail-offer.ts';
 import {Review, ReviewInfo} from '../types/review.ts';
-import {saveToken} from '../servises/token.ts';
+import {saveToken, dropToken} from '../servises/token.ts';
 import {AuthInfo, LoginInfo} from '../types/user.ts';
 import {store} from './index.ts';
 
@@ -64,9 +64,9 @@ export const sendReview = createAsyncThunk<void, ReviewInfo, {
   extra: AxiosInstance;
 }>(
   'data/fetchReviews', async (reviewInfo, {extra: api}) => {
-    const response = await api.post(`${apiRoute.reviews}/${reviewInfo.offerId}`, {
+    const response = await api.post<ReviewInfo>(`${apiRoute.reviews}/${reviewInfo.offerId}`, {
       comment: reviewInfo.comment,
-      rating: Number(reviewInfo.rating)
+      rating: reviewInfo.rating
     });
     if (response.status === 201) {
       store.dispatch(fetchReviews(reviewInfo.offerId));
@@ -95,8 +95,12 @@ export const checkAuthorization = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'auth/checkAuthorization', async (_arg, { dispatch, extra: api }) => {
-    await api.get(apiRoute.login);
-    dispatch(setAuthorizationStatus(AuthorizationStatus.Unauthorized));
+    const responce = await api.get(apiRoute.login);
+    if (responce.status === 200 || responce.status === 201){
+      dispatch(setAuthorizationStatus(AuthorizationStatus.Authorized));
+    }else {
+      dispatch(setAuthorizationStatus(AuthorizationStatus.Unauthorized));
+    }
   });
 
 export const logout = createAsyncThunk<void, undefined, {
@@ -106,5 +110,6 @@ export const logout = createAsyncThunk<void, undefined, {
 }>(
   'auth/logout', async (_arg, { dispatch, extra: api }) => {
     await api.delete(apiRoute.logout);
+    dropToken();
     dispatch(setAuthorizationStatus(AuthorizationStatus.Unauthorized));
   });
