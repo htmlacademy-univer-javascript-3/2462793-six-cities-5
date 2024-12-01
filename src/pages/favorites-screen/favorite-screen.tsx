@@ -3,46 +3,20 @@ import {Helmet} from 'react-helmet-async';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
 import {useAppSelector} from '../../hooks';
+import MemoizedHeader from '../../components/header/header.tsx';
+import {getFavoritesOffers} from '../../store/offers-data/selectors.ts';
 
 
 export function FavoriteScreen() : JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const favorites = offers.filter((offer) => offer.isFavorite);
+  const favorites = useAppSelector(getFavoritesOffers);
   const cities = Array.from(new Set(favorites.map((offer) => offer.city.name))).sort();
 
   return (
     <div className="page">
       <Helmet>
-        <title>6 sities: favorites</title>
+        <title>6 cities: favorites</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link className="header__logo-link" to={AppRoute.Main}>
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </Link>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">{favorites.length}</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <MemoizedHeader />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

@@ -1,20 +1,20 @@
-import React, {JSX} from 'react';
+import React, {JSX, memo} from 'react';
 import {useState} from 'react';
 import {minCommentLength, maxCommentLength} from '../../const.ts';
-import {store} from '../../store';
 import {sendReview} from '../../store/api-actions.ts';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {getDetailOffer} from '../../store/detail-offer-data/selectors.ts';
 
-export default function ReviewForm(): JSX.Element {
+function ReviewForm(): JSX.Element {
   const [formData, setFormData] = useState({
     review: '',
     rating: 0
   });
-
-  const offerId = useAppSelector((state) => state.detailOffer)!.id;
+  const dispatch = useAppDispatch();
+  const offerId = useAppSelector(getDetailOffer)!.id;
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (evt) => {
     evt.preventDefault();
-    store.dispatch(
+    dispatch(
       sendReview({
         offerId,
         rating: formData.rating,
@@ -84,3 +84,6 @@ export default function ReviewForm(): JSX.Element {
     </form>
   );
 }
+
+const MemoizedReviewForm = memo(ReviewForm);
+export default MemoizedReviewForm;

@@ -2,6 +2,7 @@ import {JSX} from 'react';
 import {Navigate} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
+import {getAuthoriztionStatus} from '../../store/user-data/selectors.ts';
 
 type PrivateRouteProps = {
   children: JSX.Element;
@@ -9,7 +10,7 @@ type PrivateRouteProps = {
 
 export function PrivateRouteAuthorized(props: PrivateRouteProps): JSX.Element {
   const {children} = props;
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus) === AuthorizationStatus.Authorized;
+  const isAuthorized = useAppSelector(getAuthoriztionStatus) === AuthorizationStatus.Authorized;
   return (
     isAuthorized
       ? children
@@ -19,7 +20,7 @@ export function PrivateRouteAuthorized(props: PrivateRouteProps): JSX.Element {
 
 export function PrivateRouteUnauthorized(props: PrivateRouteProps): JSX.Element {
   const {children} = props;
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus) === AuthorizationStatus.Unauthorized;
+  const isAuthorized = useAppSelector(getAuthoriztionStatus) === AuthorizationStatus.Unauthorized;
   return (
     isAuthorized
       ? children

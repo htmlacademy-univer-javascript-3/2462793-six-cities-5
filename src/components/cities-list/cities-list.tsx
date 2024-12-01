@@ -1,15 +1,20 @@
-import {JSX} from 'react';
+import {JSX, memo, useCallback} from 'react';
 import {Cities} from '../../const.ts';
 import {City} from '../../types/city.ts';
 import {useAppDispatch} from '../../hooks';
-import {changeActiveCity} from '../../store/action.ts';
+import {changeActiveCity} from '../../store/app-data/app-data.ts';
 
 type CitiesListProps = {
   activeCity: string;
 }
-
-export function CitiesList({activeCity} : CitiesListProps) : JSX.Element {
+function CitiesList({activeCity} : CitiesListProps) : JSX.Element {
   const dispatch = useAppDispatch();
+  const changeActiveCityHandle = useCallback(
+    (city: City) => {
+      dispatch(changeActiveCity(city));
+    },
+    [dispatch]
+  );
 
   return (
     <section className="locations container">
@@ -23,7 +28,7 @@ export function CitiesList({activeCity} : CitiesListProps) : JSX.Element {
             ) : (
               <a
                 className="locations__item-link tabs__item"
-                onClick={() => dispatch(changeActiveCity(city))}
+                onClick={() => changeActiveCityHandle(city)}
               >
                 <span>{city.name}</span>
               </a>
@@ -34,3 +39,7 @@ export function CitiesList({activeCity} : CitiesListProps) : JSX.Element {
     </section>
   );
 }
+
+const MemoizedCitiesList = memo(CitiesList);
+
+export default MemoizedCitiesList;

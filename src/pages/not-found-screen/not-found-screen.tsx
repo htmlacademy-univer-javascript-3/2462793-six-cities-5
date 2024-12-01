@@ -8,7 +8,7 @@ export function NotFoundScreen() : JSX.Element {
   return (
     <div className="page-400">
       <Helmet>
-        <title>6 sities: Page Not Found</title>
+        <title>6 cities: Page Not Found</title>
       </Helmet>
       <div className="page-404">
         <h1 className="text-404">404</h1>

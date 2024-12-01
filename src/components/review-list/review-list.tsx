@@ -1,19 +1,24 @@
-import {JSX} from 'react';
+import {JSX, memo} from 'react';
 import {Review} from '../../types/review.ts';
-import {ReviewItem} from '../review-item/review-item.tsx';
+import MemoizedReviewItem from '../review-item/review-item.tsx';
 
 type ReviewListProps = {
   reviews: Review[];
 }
 
-export function ReviewList({reviews} : ReviewListProps) : JSX.Element {
+function ReviewList({reviews} : ReviewListProps) : JSX.Element {
   return (
     <ul className="reviews__list">
       {reviews.map((review) => (
-        <ReviewItem
+        <MemoizedReviewItem
           key={review.id}
           review={review}
         />))}
     </ul>
   );
 }
+
+const MemoizedReviewList = memo(ReviewList, (prevProps, nextProps) => {
+  return prevProps.reviews === nextProps.reviews;
+});
+export default MemoizedReviewList;

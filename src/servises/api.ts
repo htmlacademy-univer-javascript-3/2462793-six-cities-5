@@ -1,8 +1,9 @@
 import axios, {AxiosError, AxiosInstance, InternalAxiosRequestConfig} from 'axios';
 import {getToken} from './token.ts';
 import {store} from '../store';
-import {setAuthorizationStatus, setDetailOffer} from '../store/action.ts';
 import {AuthorizationStatus} from '../const.ts';
+import {setAuthorizationStatus} from '../store/user-data/user-data.ts';
+import {setDetailOffer} from '../store/detail-offer-data/detail-offer-data.ts';
 
 const baseURL = 'https://14.design.htmlacademy.pro/six-cities';
 const requestTimeout = 5000;
@@ -39,7 +40,7 @@ export const createAPI = () : AxiosInstance => {
         );
       }
       if (error.response && error.response.status === 404) {
-        store.dispatch(setDetailOffer(undefined));
+        store.dispatch(setDetailOffer('NOT_FOUND'));
       }
       throw error;
     },
