@@ -18,7 +18,5 @@ function ReviewList({reviews} : ReviewListProps) : JSX.Element {
   );
 }
 
-const MemoizedReviewList = memo(ReviewList, (prevProps, nextProps) => {
-  return prevProps.reviews === nextProps.reviews;
-});
+const MemoizedReviewList = memo(ReviewList, (prevProps, nextProps) => prevProps.reviews === nextProps.reviews);
 export default MemoizedReviewList;

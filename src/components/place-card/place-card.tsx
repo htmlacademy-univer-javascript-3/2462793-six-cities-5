@@ -28,7 +28,7 @@ function PlaceCard({offer, onMouseLeave, onMouseEnter}: PlaceCardProps): JSX.Ele
     } else {
       navigate(AppRoute.Login);
     }
-  }, [isAuth, isFavorite, offer, dispatch, id]);
+  }, [isAuth, isFavorite, offer, dispatch, id, navigate]);
 
   return (
     <article className="cities__card place-card"
@@ -80,7 +80,5 @@ function PlaceCard({offer, onMouseLeave, onMouseEnter}: PlaceCardProps): JSX.Ele
   );
 }
 
-const MemoizedPlaceCard = memo(PlaceCard, (prevProps, nextProps) => {
-  return prevProps.offer.id === nextProps.offer.id && prevProps.offer.isFavorite === nextProps.offer.isFavorite;
-});
+const MemoizedPlaceCard = memo(PlaceCard, (prevProps, nextProps) => prevProps.offer.id === nextProps.offer.id && prevProps.offer.isFavorite === nextProps.offer.isFavorite);
 export default MemoizedPlaceCard;

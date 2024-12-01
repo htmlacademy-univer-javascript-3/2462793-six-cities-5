@@ -40,7 +40,7 @@ export const createAPI = () : AxiosInstance => {
         );
       }
       if (error.response && error.response.status === 404) {
-        store.dispatch(setDetailOffer('NOT_FOUND'));
+        store.dispatch(setDetailOffer(undefined));
       }
       throw error;
     },

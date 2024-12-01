@@ -4,6 +4,6 @@ import {Namespace} from '../../const.ts';
 import {Offer} from '../../types/offer.ts';
 import {Review} from '../../types/review.ts';
 
-export const getDetailOffer = (state: State): DetailOffer | null => state[Namespace.DetailOffer].detailOffer;
+export const getDetailOffer = (state: State): DetailOffer | null | undefined=> state[Namespace.DetailOffer].detailOffer;
 export const getNearOffers = (state: State): Offer[] => state[Namespace.DetailOffer].nearOffers;
 export const getReviews = (state: State): Review[] => state[Namespace.DetailOffer].reviews;

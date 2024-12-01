@@ -15,7 +15,7 @@ export const detailOfferData = createSlice({
   name: Namespace.DetailOffer,
   initialState,
   reducers:{
-    setDetailOffer: (state, action: PayloadAction<DetailOffer | null | 'NOT_FOUND'>) => {
+    setDetailOffer: (state, action: PayloadAction<DetailOffer | null | undefined>) => {
       state.detailOffer = action.payload;
     },
     setNearOffers: (state, action: PayloadAction<Offer[]>) => {

@@ -14,7 +14,7 @@ export type AppData = {
 };
 
 export type DetailOfferData = {
-  detailOffer: DetailOffer | null | 'NOT_FOUND';
+  detailOffer: DetailOffer | null | undefined;
   nearOffers: Offer[];
   reviews: Review[];
 };

@@ -22,7 +22,7 @@ export function OfferScreen() : JSX.Element {
     dispatch(fetchDetailOffer(id!));
     dispatch(fetchNearOffers(id!));
     dispatch(fetchReviews(id!));
-  }, [id]);
+  }, [dispatch, id]);
 
   const offer = useAppSelector(getDetailOffer);
   const nearOffers = useAppSelector(getNearOffers);
