@@ -1,7 +1,7 @@
 import {JSX, useEffect} from 'react';
 import {Offer} from '../../types/offer.ts';
 import {useState} from 'react';
-import {PlaceCard} from '../place-card/place-card.tsx';
+import MemoizedPlaceCard from '../place-card/place-card.tsx';
 
 type OffersListProps = {
   offers: Offer[];
@@ -26,7 +26,7 @@ export function OffersList({offers, onChange} : OffersListProps) : JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <PlaceCard
+        <MemoizedPlaceCard
           key={offer.id}
           offer={offer}
           onMouseEnter={() => handleMouseEnter(offer.id)}

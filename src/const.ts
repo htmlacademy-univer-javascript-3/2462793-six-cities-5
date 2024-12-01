@@ -99,17 +99,31 @@ export const Cities : City[] = [
   Dusseldorf
 ];
 
-export const sortOptions : SortOption[] = [
+export const SortOptions : SortOption[] = [
   'Popular',
   'Price: low to high',
   'Price: high to low',
   'Top rated first',
 ];
 
-export const apiRoute = {
+export const ApiRoute = {
   offers: '/offers',
   favorite: '/favorite',
   login: '/login',
   logout: '/logout',
   reviews: '/comments'
 };
+
+export enum Namespace {
+  App = 'APP',
+  Offers = 'OFFERS',
+  DetailOffer = 'DETAIL_OFFER',
+  User = 'USER'
+}
+
+export enum FavoriteStatus {
+  Remove,
+  Add
+}
+
+

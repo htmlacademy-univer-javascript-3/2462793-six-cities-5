@@ -1,5 +1,5 @@
-import {JSX, useState} from 'react';
-import {sortOptions} from '../../const.ts';
+import {JSX, useCallback, useState} from 'react';
+import {SortOptions} from '../../const.ts';
 import {SortOption} from '../../types/sort-option.ts';
 
 type SortingProps = {
@@ -10,15 +10,15 @@ export function Sorting({onSortChange} : SortingProps) : JSX.Element {
   const [activeSortOption, setActiveSortOption] = useState<SortOption>('Popular');
   const [isOptionsVisible, setIsOptionsVisible] = useState<boolean>(false);
 
-  const handleOptionClick = (option: SortOption) => {
+  const handleOptionClick = useCallback((option: SortOption) => {
     setActiveSortOption(option);
     onSortChange(option);
     setIsOptionsVisible(false);
-  };
+  }, [onSortChange]);
 
-  const handleListOptionClick = () => {
-    setIsOptionsVisible(!isOptionsVisible);
-  };
+  const handleListOptionClick = useCallback(() => {
+    setIsOptionsVisible((prevState) => !prevState);
+  }, []);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -30,7 +30,7 @@ export function Sorting({onSortChange} : SortingProps) : JSX.Element {
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOptionsVisible ? 'places__options--opened' : ''}`}>
-        {sortOptions.map((option) => (
+        {SortOptions.map((option) => (
           <li
             key={option}
             className={`places__option ${option === activeSortOption ? 'places__option--active' : ''}`}
@@ -44,3 +44,4 @@ export function Sorting({onSortChange} : SortingProps) : JSX.Element {
     </form>
   );
 }
+

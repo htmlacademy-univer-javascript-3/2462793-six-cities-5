@@ -1,38 +1,27 @@
 import {FormEvent, JSX, useState} from 'react';
 import {Helmet} from 'react-helmet-async';
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const.ts';
 import {LoginInfo} from '../../types/user.ts';
-import {store} from '../../store';
 import {login} from '../../store/api-actions.ts';
+import {useAppDispatch} from '../../hooks';
+import MemoizedHeader from '../../components/header/header.tsx';
 
 export function LoginScreen() : JSX.Element {
   const [loginInfo, setLoginInfo] = useState<LoginInfo>({
     email: '',
     password: ''
   });
-
+  const dispatch = useAppDispatch();
   const submitHandle = (evt: FormEvent) => {
     evt.preventDefault();
-    store.dispatch(login(loginInfo));
+    dispatch(login(loginInfo));
   };
 
   return (
     <div className="page page--gray page--login">
       <Helmet>
-        <title>6 sities: authorization</title>
+        <title>6 cities: authorization</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link className="header__logo-link" to={AppRoute.Main}>
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      <MemoizedHeader />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">
