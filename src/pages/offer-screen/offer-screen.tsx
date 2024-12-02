@@ -1,7 +1,7 @@
 import {JSX, useEffect, useMemo} from 'react';
 import {Helmet} from 'react-helmet-async';
 import {Navigate, useParams} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const.ts';
+import {AuthorizationStatus, LoadingStatus} from '../../const.ts';
 import {Map} from '../../components/map/map.tsx';
 import MemoizedReviewList from '../../components/review-list/review-list.tsx';
 import {OffersList} from '../../components/offers-list/offers-list.tsx';
@@ -13,6 +13,7 @@ import {setDetailOffer} from '../../store/detail-offer-data/detail-offer-data.ts
 import {getDetailOffer, getNearOffers, getReviews} from '../../store/detail-offer-data/selectors.ts';
 import {getAuthoriztionStatus} from '../../store/user-data/selectors.ts';
 import MemoizedReviewForm from '../../components/review-form/review-form.tsx';
+import {getLoadingStatus} from '../../store/app-data/selectors.ts';
 
 export function OfferScreen() : JSX.Element {
   const {id} = useParams();
@@ -29,13 +30,18 @@ export function OfferScreen() : JSX.Element {
   const memoizedNearOffers = useMemo(() => nearOffers.slice(0, 3), [nearOffers]);
   const reviews = useAppSelector(getReviews);
   const isAuth = useAppSelector(getAuthoriztionStatus) === AuthorizationStatus.Authorized;
+  const loadingStatus = useAppSelector(getLoadingStatus);
 
-  if (offer === null){
-    return (<Loading />);
+  if (loadingStatus === LoadingStatus.Loading){
+    return <Loading />;
   }
 
-  if (offer === undefined) {
+  if (loadingStatus === LoadingStatus.Failed && !offer) {
     return <Navigate to='*' />;
+  }
+
+  if (!offer) {
+    return <> </>;
   }
 
   return (
@@ -137,7 +143,7 @@ export function OfferScreen() : JSX.Element {
           </div>
           <Map
             city={offer.city}
-            offers={nearOffers}
+            offers={memoizedNearOffers}
             selectedOffer={undefined}
           />
         </section>
