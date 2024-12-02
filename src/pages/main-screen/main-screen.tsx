@@ -7,8 +7,11 @@ import {useAppSelector} from '../../hooks';
 import {Sorting} from '../../components/sorting/sorting.tsx';
 import {SortOption} from '../../types/sort-option.ts';
 import MemoizedHeader from '../../components/header/header.tsx';
-import {getActiveCity} from '../../store/app-data/selectors.ts';
+import {getActiveCity, getLoadingStatus} from '../../store/app-data/selectors.ts';
 import {getOffers} from '../../store/offers-data/selectors.ts';
+import {LoadingStatus} from '../../const.ts';
+import {MainEmptyScreen} from '../main-empty-screen/main-empty-screen.tsx';
+import {Loading} from '../../components/loading/loading.tsx';
 
 
 export function MainScreen(): JSX.Element {
@@ -37,6 +40,15 @@ export function MainScreen(): JSX.Element {
   const handleSortChange = (option: SortOption) => {
     setSortingOption(option);
   };
+  const loadingStatus = useAppSelector(getLoadingStatus);
+
+  if (loadingStatus !== LoadingStatus.Loading && offers.length === 0){
+    return <MainEmptyScreen />;
+  }
+
+  if (loadingStatus === LoadingStatus.Loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="page page--gray page--main">

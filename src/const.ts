@@ -126,4 +126,9 @@ export enum FavoriteStatus {
   Add
 }
 
+export enum LoadingStatus {
+  Loading = 'loading' ,
+  Succeed = 'succeed',
+  Failed = 'failed'
+}
 

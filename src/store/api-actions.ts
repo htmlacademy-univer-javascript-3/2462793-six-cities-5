@@ -2,16 +2,17 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.ts';
 import {AxiosInstance} from 'axios';
 import {Offer} from '../types/offer.ts';
-import {ApiRoute, AuthorizationStatus} from '../const.ts';
+import {ApiRoute, AuthorizationStatus, LoadingStatus} from '../const.ts';
 import {DetailOffer} from '../types/detail-offer.ts';
 import {Review, ReviewInfo} from '../types/review.ts';
-import {saveToken, dropToken, getToken} from '../servises/token.ts';
+import {dropToken, getToken, saveToken} from '../servises/token.ts';
 import {AuthInfo, LoginInfo} from '../types/user.ts';
 import {store} from './index.ts';
 import {FavoriteInfo} from '../types/favorite-info.ts';
 import {setFavoritesCount, setFavoritesOffers, setOffers, updateOffers} from './offers-data/offers-data.ts';
 import {setDetailOffer, setNearOffers, setReviews} from './detail-offer-data/detail-offer-data.ts';
 import {saveUserEmail, setAuthorizationStatus} from './user-data/user-data.ts';
+import {setLoadingStatus} from './app-data/app-data.ts';
 
 export const fetchOffers = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -20,8 +21,15 @@ export const fetchOffers = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Offer[]>(ApiRoute.offers);
-    dispatch(setOffers(data));
+    dispatch(setLoadingStatus(LoadingStatus.Loading));
+    try {
+      const { data } = await api.get<Offer[]>(ApiRoute.offers);
+      dispatch(setOffers(data)); // обновляем данные
+      dispatch(setLoadingStatus(LoadingStatus.Succeed));
+    } catch (error) {
+      dispatch(setLoadingStatus(LoadingStatus.Failed));
+      throw error;
+    }
   }
 );
 
@@ -59,8 +67,15 @@ export const fetchDetailOffer = createAsyncThunk<void, Offer['id'], {
 }>(
   'data/fetchDetailOffer',
   async (offerId, {dispatch, extra: api}) => {
-    const {data} = await api.get<DetailOffer>(`${ApiRoute.offers}/${offerId}`);
-    dispatch(setDetailOffer(data));
+    dispatch(setLoadingStatus(LoadingStatus.Loading));
+    try {
+      const {data} = await api.get<DetailOffer>(`${ApiRoute.offers}/${offerId}`);
+      dispatch(setDetailOffer(data));
+      dispatch(setLoadingStatus(LoadingStatus.Succeed));
+    } catch (error) {
+      dispatch(setLoadingStatus(LoadingStatus.Failed));
+      throw error;
+    }
   }
 );
 
