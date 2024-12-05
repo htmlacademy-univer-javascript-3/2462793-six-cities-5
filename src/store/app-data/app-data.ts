@@ -1,10 +1,10 @@
 import {AppData} from '../../types/state.ts';
-import {LoadingStatus, Namespace, Paris} from '../../const.ts';
+import {LoadingStatus, Namespace, PARIS} from '../../const.ts';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {City} from '../../types/city.ts';
 
 const initialState: AppData = {
-  city: Paris,
+  city: PARIS,
   loadingStatus: null
 };
 

@@ -11,7 +11,7 @@ import {Loading} from '../../components/loading/loading.tsx';
 import MemoizedHeader from '../../components/header/header.tsx';
 import {setDetailOffer} from '../../store/detail-offer-data/detail-offer-data.ts';
 import {getDetailOffer, getNearOffers, getReviews} from '../../store/detail-offer-data/selectors.ts';
-import {getAuthoriztionStatus} from '../../store/user-data/selectors.ts';
+import {getAuthorizationStatus} from '../../store/user-data/selectors.ts';
 import MemoizedReviewForm from '../../components/review-form/review-form.tsx';
 import {getLoadingStatus} from '../../store/app-data/selectors.ts';
 
@@ -29,7 +29,7 @@ export function OfferScreen() : JSX.Element {
   const nearOffers = useAppSelector(getNearOffers);
   const memoizedNearOffers = useMemo(() => nearOffers.slice(0, 3), [nearOffers]);
   const reviews = useAppSelector(getReviews);
-  const isAuth = useAppSelector(getAuthoriztionStatus) === AuthorizationStatus.Authorized;
+  const isAuth = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Authorized;
   const loadingStatus = useAppSelector(getLoadingStatus);
 
   if (loadingStatus === LoadingStatus.Loading){

@@ -1,6 +1,6 @@
 import React, {JSX, memo} from 'react';
 import {useState} from 'react';
-import {minCommentLength, maxCommentLength} from '../../const.ts';
+import {MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH} from '../../const.ts';
 import {sendReview} from '../../store/api-actions.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {getDetailOffer} from '../../store/detail-offer-data/selectors.ts';
@@ -26,8 +26,8 @@ function ReviewForm(): JSX.Element {
   };
 
   const isValid =
-    formData.review.length >= minCommentLength &&
-    formData.review.length <= maxCommentLength &&
+    formData.review.length >= MIN_COMMENT_LENGTH &&
+    formData.review.length <= MAX_COMMENT_LENGTH &&
     formData.rating !== null;
 
   const handleFieldChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -38,7 +38,7 @@ function ReviewForm(): JSX.Element {
     });
   };
 
-  function renderRatingInput(value: number, title: string) {
+  function RenderRatingInput(value: number, title: string) {
     return (
       <>
         <input
@@ -63,16 +63,16 @@ function ReviewForm(): JSX.Element {
     <form className="reviews__form form" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {renderRatingInput(5, 'perfect')}
-        {renderRatingInput(4, 'good')}
-        {renderRatingInput(3, 'not bad')}
-        {renderRatingInput(2, 'badly')}
-        {renderRatingInput(1, 'terribly')}
+        {RenderRatingInput(5, 'perfect')}
+        {RenderRatingInput(4, 'good')}
+        {RenderRatingInput(3, 'not bad')}
+        {RenderRatingInput(2, 'badly')}
+        {RenderRatingInput(1, 'terribly')}
       </div>
       <textarea className="reviews__textarea form__textarea" onChange={handleFieldChange} value={formData.review} id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"/>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{minCommentLength} characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_COMMENT_LENGTH} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"

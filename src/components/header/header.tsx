@@ -4,10 +4,10 @@ import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {logout} from '../../store/api-actions.ts';
 import {getFavoritesCount} from '../../store/offers-data/selectors.ts';
-import {getAuthoriztionStatus, getUserEmail} from '../../store/user-data/selectors.ts';
+import {getAuthorizationStatus, getUserEmail} from '../../store/user-data/selectors.ts';
 import {saveUserEmail} from '../../store/user-data/user-data.ts';
 function Header() : JSX.Element {
-  const isAuth = useAppSelector(getAuthoriztionStatus) === AuthorizationStatus.Authorized;
+  const isAuth = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Authorized;
   const dispatch = useAppDispatch();
   const logoutHandle = () => {
     dispatch(logout());

@@ -3,7 +3,7 @@ import {Offer} from '../../types/offer.ts';
 import {Link, useNavigate} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus, FavoriteStatus} from '../../const.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getAuthoriztionStatus} from '../../store/user-data/selectors.ts';
+import {getAuthorizationStatus} from '../../store/user-data/selectors.ts';
 import {updateOffers} from '../../store/offers-data/offers-data.ts';
 import {changeFavoriteStatus} from '../../store/api-actions.ts';
 
@@ -16,7 +16,7 @@ type PlaceCardProps = {
 function PlaceCard({offer, onMouseLeave, onMouseEnter}: PlaceCardProps): JSX.Element {
   const {id, isPremium, previewImage, price, rating, title, type, isFavorite} = offer;
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector(getAuthoriztionStatus) === AuthorizationStatus.Authorized;
+  const isAuth = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Authorized;
   const navigate = useNavigate();
 
   const bookmarkClickHandle = useCallback(() => {
