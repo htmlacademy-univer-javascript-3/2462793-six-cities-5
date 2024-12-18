@@ -4,6 +4,9 @@ import {LoginInfo} from '../../types/user.ts';
 import {login} from '../../store/api-actions.ts';
 import {useAppDispatch} from '../../hooks';
 import MemoizedHeader from '../../components/header/header.tsx';
+import {AppRoute, CITIES} from '../../const.ts';
+import {Link} from 'react-router-dom';
+import {changeActiveCity} from '../../store/app-data/app-data.ts';
 
 export function LoginScreen() : JSX.Element {
   const [loginInfo, setLoginInfo] = useState<LoginInfo>({
@@ -15,6 +18,7 @@ export function LoginScreen() : JSX.Element {
     evt.preventDefault();
     dispatch(login(loginInfo));
   };
+  const city = CITIES[Math.floor(Math.random() * CITIES.length)];
 
   return (
     <div className="page page--gray page--login">
@@ -69,9 +73,13 @@ export function LoginScreen() : JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link
+                to={AppRoute.Main}
+                className="locations__item-link"
+                onClick={() => dispatch(changeActiveCity(city))}
+              >
+                <span>{city.name}</span>
+              </Link>
             </div>
           </section>
         </div>

@@ -14,6 +14,7 @@ import {getDetailOffer, getNearOffers, getReviews} from '../../store/detail-offe
 import {getAuthorizationStatus} from '../../store/user-data/selectors.ts';
 import MemoizedReviewForm from '../../components/review-form/review-form.tsx';
 import {getLoadingStatus} from '../../store/app-data/selectors.ts';
+import {BookmarkButton} from '../../components/bookmark-button/bookmark-button.tsx';
 
 export function OfferScreen() : JSX.Element {
   const {id} = useParams();
@@ -71,15 +72,7 @@ export function OfferScreen() : JSX.Element {
                 <h1 className="offer__name">
                   {offer.title}
                 </h1>
-                <button
-                  className={`offer__bookmark-button ${offer.isFavorite && 'offer__bookmark-button--active'} button`}
-                  type="button"
-                >
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <BookmarkButton size='big' isFavorite={offer.isFavorite} usagePlace='offer' offerId={offer.id} />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

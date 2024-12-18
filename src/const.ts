@@ -121,11 +121,6 @@ export enum Namespace {
   User = 'USER'
 }
 
-export enum FavoriteStatus {
-  Remove,
-  Add
-}
-
 export enum LoadingStatus {
   Loading = 'loading' ,
   Succeed = 'succeed',
