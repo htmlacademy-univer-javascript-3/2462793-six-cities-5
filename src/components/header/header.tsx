@@ -21,6 +21,12 @@ function Header() : JSX.Element {
     }
   }, [dispatch, userEmail]);
 
+  useEffect(() => {
+    if (userEmail) {
+      localStorage.setItem('userEmail', userEmail);
+    }
+  }, [userEmail]);
+
   return (
     <header className="header">
       <div className="container">
