@@ -48,9 +48,9 @@ function Header() : JSX.Element {
                   </Link>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" onClick={logoutHandle}>
+                  <div className="header__nav-link" onClick={logoutHandle}>
                     <span className="header__signout">Sign out</span>
-                  </a>
+                  </div>
                 </li>
               </ul>
             </nav>

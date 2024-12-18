@@ -22,16 +22,16 @@ function CitiesList({activeCity} : CitiesListProps) : JSX.Element {
         {CITIES.map((city : City) => (
           <li key={city.name} className="locations__item">
             {city.name === activeCity ? (
-              <a className="locations__item-link tabs__item tabs__item--active">
+              <div className="locations__item-link tabs__item tabs__item--active">
                 <span>{city.name}</span>
-              </a>
+              </div>
             ) : (
-              <a
+              <div
                 className="locations__item-link tabs__item"
                 onClick={() => changeActiveCityHandle(city)}
               >
                 <span>{city.name}</span>
-              </a>
+              </div>
             )}
           </li>
         ))}
