@@ -14,7 +14,7 @@ export const userData = createSlice({
     setAuthorizationStatus: (state, action: PayloadAction<AuthorizationStatus>) => {
       state.authorizationStatus = action.payload;
     },
-    saveUserEmail: (state, action: PayloadAction<string>) => {
+    saveUserEmail: (state, action: PayloadAction<string | null>) => {
       state.userEmail = action.payload;
     }
   }
