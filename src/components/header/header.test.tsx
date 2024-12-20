@@ -8,6 +8,7 @@ import MemoizedHeader from './header.tsx';
 import userEvent from '@testing-library/user-event';
 import {logout} from '../../store/api-actions.ts';
 import {MemoryRouter} from 'react-router-dom';
+import {internet} from 'faker';
 
 describe('Component: Header', () => {
   const middlewares = [thunk];
@@ -22,10 +23,11 @@ describe('Component: Header', () => {
     },
   };
 
+  const testUserEmail = internet.email()
   const initialStateAuth = {
     USER: {
       authorizationStatus: AuthorizationStatus.Authorized,
-      userEmail: 'example@example.com',
+      userEmail: testUserEmail,
     },
     OFFERS: {
       favoritesCount: 2,
@@ -59,7 +61,7 @@ describe('Component: Header', () => {
       </Provider>
     );
 
-    const userEmail = screen.getByText('example@example.com');
+    const userEmail = screen.getByText(testUserEmail);
     expect(userEmail).toBeInTheDocument();
 
     const favoritesCount = screen.getByText('2');
@@ -99,7 +101,7 @@ describe('Component: Header', () => {
       </Provider>
     );
 
-    const favoritesLink = screen.getByText('example@example.com').closest('a');
+    const favoritesLink = screen.getByText(testUserEmail).closest('a');
     expect(favoritesLink).toHaveAttribute('href', AppRoute.Favorites);
   });
 });

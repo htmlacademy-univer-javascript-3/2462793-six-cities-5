@@ -1,11 +1,12 @@
 import {AuthorizationStatus, Namespace} from '../../const.ts';
 import {getAuthorizationStatus, getUserEmail} from './selectors.ts';
+import {internet} from 'faker';
 
 describe('UserData selectors', () => {
   const state = {
     [Namespace.User]: {
       authorizationStatus: AuthorizationStatus.Authorized,
-      userEmail: 'example@example.com',
+      userEmail: internet.email(),
     }
   };
 

@@ -1,6 +1,6 @@
 import {internet, name} from 'faker';
 import {Offer} from '../types/offer.ts';
-import {CITIES, PlaceType} from '../const.ts';
+import {AuthorizationStatus, CITIES, LoadingStatus, PARIS, PlaceType} from '../const.ts';
 import {DetailOffer} from '../types/detail-offer.ts';
 import {User} from '../types/user.ts';
 import {Review} from '../types/review.ts';
@@ -61,3 +61,29 @@ export function makeFakeReview(): Review {
     rating: Math.floor(Math.random() * 5)
   };
 }
+
+export const makeFakeStore = (initialState?: Partial<State>): State => ({
+  APP: {
+    city: PARIS,
+    loadingStatus: LoadingStatus.Succeed,
+    ...initialState?.APP
+  },
+  DETAIL_OFFER: {
+    detailOffer: null,
+    nearOffers: [],
+    reviews: [],
+    ...initialState?.DETAIL_OFFER
+  },
+  OFFERS: {
+    offers: [],
+    favoritesOffers: [],
+    favoritesCount: 0,
+    ...initialState?.OFFERS
+  },
+  USER: {
+    authorizationStatus: AuthorizationStatus.Unauthorized,
+    userEmail: null,
+    ...initialState?.USER
+  }
+});
+

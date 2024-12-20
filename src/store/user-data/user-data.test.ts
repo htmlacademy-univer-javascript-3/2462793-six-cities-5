@@ -1,6 +1,7 @@
 import {UserData} from '../../types/state.ts';
 import {AuthorizationStatus} from '../../const.ts';
 import {saveUserEmail, setAuthorizationStatus, userData} from './user-data.ts';
+import {internet} from 'faker';
 
 describe('UserData slice', () => {
   const initialState: UserData = {
@@ -32,7 +33,7 @@ describe('UserData slice', () => {
   });
 
   it('should save email with "saveUserEmail" action', () => {
-    const userEmail = 'example@example.com';
+    const userEmail = internet.email();
     const expectedState = { ...initialState, userEmail: userEmail };
 
     const result = userData.reducer(initialState, saveUserEmail(userEmail));
@@ -41,7 +42,7 @@ describe('UserData slice', () => {
   });
 
   it('should clear email with "saveUserEmail" action with empty string', () => {
-    const stateWithEmail = { ...initialState, userEmail: 'example@example.com' };
+    const stateWithEmail = { ...initialState, userEmail: internet.email() };
     const expectedState = { ...initialState, userEmail: null };
 
     const result = userData.reducer(stateWithEmail, saveUserEmail(null));
