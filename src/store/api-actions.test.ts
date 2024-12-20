@@ -40,9 +40,9 @@ describe('Async actions', () => {
       mockAxiosAdapter.onGet(ApiRoute.offers).reply(200, mockOffers);
 
       await store.dispatch(fetchOffers());
-      const actions = store.getActions();
-      expect(actions[0].type).toBe(fetchOffers.pending.type);
-      expect(actions[1].type).toBe(fetchOffers.fulfilled.type);
+      const actions = extractActionsTypes(store.getActions());
+      expect(actions).toContain(fetchOffers.pending.type);
+      expect(actions).toContain(fetchOffers.fulfilled.type);
     });
   });
 

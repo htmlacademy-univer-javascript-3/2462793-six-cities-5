@@ -38,5 +38,5 @@ export function Map({ city, offers, selectedOffer }: MapProps): JSX.Element {
     }
   }, [map, offers, selectedOffer]);
 
-  return <div className="cities__map map" style={{ height: '500px' }} ref={mapRef}></div>;
+  return <div className="cities__map map" style={{ height: '500px' }} ref={mapRef} data-testid='map'></div>;
 }
