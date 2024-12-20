@@ -1,12 +1,12 @@
-import {JSX, useCallback, useState} from 'react';
-import {SortOptions} from '../../const.ts';
+import {JSX, memo, useCallback, useState} from 'react';
+import {SORT_OPTIONS} from '../../const.ts';
 import {SortOption} from '../../types/sort-option.ts';
 
 type SortingProps = {
   onSortChange: (option: SortOption) => void;
 };
 
-export function Sorting({onSortChange} : SortingProps) : JSX.Element {
+function Sorting({onSortChange} : SortingProps) : JSX.Element {
   const [activeSortOption, setActiveSortOption] = useState<SortOption>('Popular');
   const [isOptionsVisible, setIsOptionsVisible] = useState<boolean>(false);
 
@@ -30,7 +30,7 @@ export function Sorting({onSortChange} : SortingProps) : JSX.Element {
         </svg>
       </span>
       <ul className={`places__options places__options--custom ${isOptionsVisible ? 'places__options--opened' : ''}`}>
-        {SortOptions.map((option) => (
+        {SORT_OPTIONS.map((option) => (
           <li
             key={option}
             className={`places__option ${option === activeSortOption ? 'places__option--active' : ''}`}
@@ -45,3 +45,6 @@ export function Sorting({onSortChange} : SortingProps) : JSX.Element {
   );
 }
 
+const MemoizedSorting = memo(Sorting);
+
+export default MemoizedSorting

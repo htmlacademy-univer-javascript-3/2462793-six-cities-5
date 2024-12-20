@@ -2,7 +2,7 @@ import { JSX, useEffect, useRef } from 'react';
 import { Marker, layerGroup } from 'leaflet';
 import { City } from '../../types/city';
 import { Offer } from '../../types/offer';
-import { defaultCustomIcon, currentCustomIcon } from '../../const';
+import { DEFAULT_CUSTOM_ICON, CURRENT_CUSTOM_ICON } from '../../const';
 import { useMap } from '../../hooks/use-map';
 import 'leaflet/dist/leaflet.css';
 
@@ -25,8 +25,8 @@ export function Map({ city, offers, selectedOffer }: MapProps): JSX.Element {
 
         marker.setIcon(
           selectedOffer && offer.id === selectedOffer.id
-            ? currentCustomIcon
-            : defaultCustomIcon
+            ? CURRENT_CUSTOM_ICON
+            : DEFAULT_CUSTOM_ICON
         )
           .addTo(markerLayer);
       });

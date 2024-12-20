@@ -2,7 +2,6 @@ import './loading.css';
 import React, {JSX} from 'react';
 
 export function Loading() : JSX.Element {
-  // Жестко заданные параметры
   const color : string = '#3069a6';
   const size: number = 80;
   const speedMultiplier : number = 1;

@@ -1,10 +1,10 @@
-import {JSX, useState} from 'react';
+import {JSX, useCallback, useMemo, useState} from 'react';
 import {Helmet} from 'react-helmet-async';
 import {OffersList} from '../../components/offers-list/offers-list.tsx';
 import {Map} from '../../components/map/map.tsx';
 import MemoizedCitiesList from '../../components/cities-list/cities-list.tsx';
 import {useAppSelector} from '../../hooks';
-import {Sorting} from '../../components/sorting/sorting.tsx';
+import MemoizedSorting from '../../components/sorting/sorting.tsx';
 import {SortOption} from '../../types/sort-option.ts';
 import MemoizedHeader from '../../components/header/header.tsx';
 import {getActiveCity, getLoadingStatus} from '../../store/app-data/selectors.ts';
@@ -25,7 +25,7 @@ export function MainScreen(): JSX.Element {
     ? 'No places to stay available'
     : `${offers.length} places to stay in ${activeCity.name}`;
   const [sortingOption, setSortingOption] = useState<SortOption>('Popular');
-  const sortedOffers = [...offers].sort((a, b) => {
+  const sortedOffers = useMemo(() => [...offers].sort((a, b) => {
     switch (sortingOption) {
       case 'Price: low to high':
         return a.price - b.price;
@@ -36,10 +36,10 @@ export function MainScreen(): JSX.Element {
       default:
         return 0;
     }
-  });
-  const handleSortChange = (option: SortOption) => {
+  }), [offers, sortingOption]);
+  const handleSortChange = useCallback((option: SortOption) => {
     setSortingOption(option);
-  };
+  }, []);
   const loadingStatus = useAppSelector(getLoadingStatus);
 
   if (loadingStatus !== LoadingStatus.Loading && offers.length === 0){
@@ -66,7 +66,7 @@ export function MainScreen(): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{placesFoundCaption}</b>
-              <Sorting onSortChange={handleSortChange}/>
+              <MemoizedSorting onSortChange={handleSortChange}/>
               <OffersList offers={sortedOffers} onChange={setActiveOfferId}/>
             </section>
             <div className="cities__right-section">

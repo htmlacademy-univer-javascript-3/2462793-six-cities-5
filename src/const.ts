@@ -20,23 +20,23 @@ export enum PlaceType {
   Room = 'Room'
 }
 
-export const defaultCustomIcon = new Icon({
+export const DEFAULT_CUSTOM_ICON = new Icon({
   iconUrl: 'public/img/pin.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
-export const currentCustomIcon = new Icon({
+export const CURRENT_CUSTOM_ICON = new Icon({
   iconUrl: 'public/img/pin-active.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
-export const minCommentLength = 50;
+export const MIN_COMMENT_LENGTH = 50;
 
-export const maxCommentLength = 300;
+export const MAX_COMMENT_LENGTH = 300;
 
-export const Paris: City = {
+export const PARIS: City = {
   name: 'Paris',
   location: {
     latitude: 48.864716,
@@ -45,7 +45,7 @@ export const Paris: City = {
   },
 };
 
-export const Cologne: City = {
+export const COLOGNE: City = {
   name: 'Cologne',
   location: {
     latitude: 50.935173,
@@ -54,7 +54,7 @@ export const Cologne: City = {
   },
 };
 
-export const Brussels: City = {
+export const BRUSSELS: City = {
   name: 'Brussels',
   location: {
     latitude: 50.85045,
@@ -63,7 +63,7 @@ export const Brussels: City = {
   },
 };
 
-export const Amsterdam: City = {
+export const AMSTERDAM: City = {
   name: 'Amsterdam',
   location: {
     latitude: 52.37454,
@@ -72,7 +72,7 @@ export const Amsterdam: City = {
   }
 };
 
-export const Hamburg: City = {
+export const HAMBURG: City = {
   name: 'Hamburg',
   location: {
     latitude: 53.551086,
@@ -81,7 +81,7 @@ export const Hamburg: City = {
   },
 };
 
-export const Dusseldorf: City = {
+export const DUSSELDORF: City = {
   name: 'Dusseldorf',
   location: {
     latitude: 51.233334,
@@ -90,40 +90,35 @@ export const Dusseldorf: City = {
   },
 };
 
-export const Cities : City[] = [
-  Paris,
-  Cologne,
-  Brussels,
-  Amsterdam,
-  Hamburg,
-  Dusseldorf
+export const CITIES : City[] = [
+  PARIS,
+  COLOGNE,
+  BRUSSELS,
+  AMSTERDAM,
+  HAMBURG,
+  DUSSELDORF
 ];
 
-export const SortOptions : SortOption[] = [
+export const SORT_OPTIONS : SortOption[] = [
   'Popular',
   'Price: low to high',
   'Price: high to low',
   'Top rated first',
 ];
 
-export const ApiRoute = {
-  offers: '/offers',
-  favorite: '/favorite',
-  login: '/login',
-  logout: '/logout',
-  reviews: '/comments'
-};
+export enum ApiRoute {
+  offers = '/offers',
+  favorite = '/favorite',
+  login = '/login',
+  logout = '/logout',
+  reviews = '/comments'
+}
 
 export enum Namespace {
   App = 'APP',
   Offers = 'OFFERS',
   DetailOffer = 'DETAIL_OFFER',
   User = 'USER'
-}
-
-export enum FavoriteStatus {
-  Remove,
-  Add
 }
 
 export enum LoadingStatus {

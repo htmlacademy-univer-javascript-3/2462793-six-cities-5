@@ -5,7 +5,7 @@ import {Offer} from '../types/offer.ts';
 import {ApiRoute, AuthorizationStatus, LoadingStatus} from '../const.ts';
 import {DetailOffer} from '../types/detail-offer.ts';
 import {Review, ReviewInfo} from '../types/review.ts';
-import {dropToken, getToken, saveToken} from '../servises/token.ts';
+import {dropToken, getToken, saveToken} from '../serviсes/token.ts';
 import {AuthInfo, LoginInfo} from '../types/user.ts';
 import {store} from './index.ts';
 import {FavoriteInfo} from '../types/favorite-info.ts';
@@ -51,9 +51,9 @@ export const changeFavoriteStatus = createAsyncThunk<void, FavoriteInfo, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchReviews',
+  'data/fetchFavoriteStatus',
   async (favoriteInfo, {dispatch, extra: api}) => {
-    const {data} = await api.post<Offer>(`${ApiRoute.favorite}/${favoriteInfo.offerId}/${favoriteInfo.status}`);
+    const {data} = await api.post<Offer>(`${ApiRoute.favorite}/${favoriteInfo.offerId}/${+favoriteInfo.status}`);
     dispatch(updateOffers(data));
     dispatch(fetchFavoritesOffers());
   }
@@ -108,7 +108,7 @@ export const sendReview = createAsyncThunk<void, ReviewInfo, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchReviews', async (reviewInfo, {extra: api}) => {
+  'data/sendReviews', async (reviewInfo, {extra: api}) => {
     const response = await api.post<ReviewInfo>(`${ApiRoute.reviews}/${reviewInfo.offerId}`, {
       comment: reviewInfo.comment,
       rating: reviewInfo.rating
