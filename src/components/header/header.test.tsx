@@ -23,7 +23,7 @@ describe('Component: Header', () => {
     },
   };
 
-  const testUserEmail = internet.email()
+  const testUserEmail = internet.email();
   const initialStateAuth = {
     USER: {
       authorizationStatus: AuthorizationStatus.Authorized,

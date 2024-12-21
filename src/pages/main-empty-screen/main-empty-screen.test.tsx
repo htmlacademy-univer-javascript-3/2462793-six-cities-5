@@ -8,12 +8,13 @@ import {internet} from 'faker';
 import {render, screen} from '@testing-library/react';
 
 describe('Component: MainEmptyScreen', () => {
-  const component =
+  const component = (
     <MemoryRouter>
       <HelmetProvider>
         <MainEmptyScreen />
       </HelmetProvider>
     </MemoryRouter>
+  );
   it('should render "No places to stay available" when there are no offers', () => {
     const { withStoreComponent } = withStore(
       component,
@@ -39,4 +40,4 @@ describe('Component: MainEmptyScreen', () => {
     expect(screen.getByText(/No places to stay available/i)).toBeInTheDocument();
     expect(screen.getByText(/We could not find any property available at the moment in Paris/i)).toBeInTheDocument();
   });
-})
+});

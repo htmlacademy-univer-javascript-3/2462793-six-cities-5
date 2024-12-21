@@ -8,12 +8,13 @@ import {internet} from 'faker';
 import {render, screen} from '@testing-library/react';
 
 describe('Component: MainScreen', () => {
-  const component =
+  const component = (
     <MemoryRouter>
       <HelmetProvider>
         <MainScreen />
       </HelmetProvider>
     </MemoryRouter>
+  );
   it('should render offers when there are offers available', () => {
     const offer = makeFakeOffer();
 

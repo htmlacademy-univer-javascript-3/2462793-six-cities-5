@@ -47,4 +47,4 @@ function Sorting({onSortChange} : SortingProps) : JSX.Element {
 
 const MemoizedSorting = memo(Sorting);
 
-export default MemoizedSorting
+export default MemoizedSorting;

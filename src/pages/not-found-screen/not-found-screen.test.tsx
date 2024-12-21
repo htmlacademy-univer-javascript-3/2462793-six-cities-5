@@ -5,12 +5,13 @@ import {NotFoundScreen} from './not-found-screen.tsx';
 
 describe('Component: NotFoundScreen', () => {
   it('should render offers when there are offers available', () => {
-    const component =
+    const component = (
       <MemoryRouter>
         <HelmetProvider>
           <NotFoundScreen />
         </HelmetProvider>
       </MemoryRouter>
+    );
     render(component);
 
     expect(screen.getByText('Page Not Found')).toBeInTheDocument();

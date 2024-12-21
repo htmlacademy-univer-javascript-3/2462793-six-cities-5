@@ -32,7 +32,7 @@ export function LoginScreen() : JSX.Element {
     loginInfo.email &&
     validateEmail(loginInfo.email) &&
     loginInfo.password &&
-    validatePassword(loginInfo.password)
+    validatePassword(loginInfo.password);
 
   const city = CITIES[Math.floor(Math.random() * CITIES.length)];
 

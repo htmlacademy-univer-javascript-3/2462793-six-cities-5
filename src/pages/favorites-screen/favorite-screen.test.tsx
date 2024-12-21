@@ -8,12 +8,13 @@ import {MemoryRouter} from 'react-router-dom';
 import {internet} from 'faker';
 
 describe('Component: FavoriteScreen', () => {
-  const component =
+  const component = (
     <MemoryRouter>
       <HelmetProvider>
         <FavoriteScreen />
       </HelmetProvider>
     </MemoryRouter>
+  );
   it('should render "Nothing yet saved" when there are no favorite offers', () => {
     const { withStoreComponent } = withStore(
       component,

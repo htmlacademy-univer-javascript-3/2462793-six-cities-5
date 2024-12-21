@@ -30,7 +30,7 @@ describe('Component: Map', () => {
 
     const mapContainer = screen.getByTestId('map');
     expect(mapContainer).toBeInTheDocument();
-    expect(mapContainer).toHaveClass('cities__map map')
+    expect(mapContainer).toHaveClass('cities__map map');
   });
 
   it('should highlight active marker when activeOffer is provided', () => {
