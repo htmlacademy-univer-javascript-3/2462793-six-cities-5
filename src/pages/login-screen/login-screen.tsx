@@ -18,6 +18,22 @@ export function LoginScreen() : JSX.Element {
     evt.preventDefault();
     dispatch(login(loginInfo));
   };
+  function validateEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  function validatePassword(password: string): boolean {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).*$/;
+    return passwordRegex.test(password);
+  }
+
+  const isValid = () =>
+    loginInfo.email &&
+    validateEmail(loginInfo.email) &&
+    loginInfo.password &&
+    validatePassword(loginInfo.password)
+
   const city = CITIES[Math.floor(Math.random() * CITIES.length)];
 
   return (
@@ -66,6 +82,7 @@ export function LoginScreen() : JSX.Element {
                 className="login__submit form__submit button"
                 type="submit"
                 onClick={submitHandle}
+                disabled={!isValid()}
               >
                 Sign in
               </button>

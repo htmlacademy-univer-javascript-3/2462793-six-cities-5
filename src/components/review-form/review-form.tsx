@@ -28,7 +28,7 @@ function ReviewForm(): JSX.Element {
   const isValid =
     formData.review.length >= MIN_COMMENT_LENGTH &&
     formData.review.length <= MAX_COMMENT_LENGTH &&
-    formData.rating !== null;
+    formData.rating !== 0;
 
   const handleFieldChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = evt.target;
