@@ -15,6 +15,7 @@ import {getAuthorizationStatus} from '../../store/user-data/selectors.ts';
 import MemoizedReviewForm from '../../components/review-form/review-form.tsx';
 import {getLoadingStatus} from '../../store/app-data/selectors.ts';
 import {BookmarkButton} from '../../components/bookmark-button/bookmark-button.tsx';
+import {getOffers} from '../../store/offers-data/selectors.ts';
 
 export function OfferScreen() : JSX.Element {
   const {id} = useParams();
@@ -27,6 +28,8 @@ export function OfferScreen() : JSX.Element {
   }, [dispatch, id]);
 
   const offer = useAppSelector(getDetailOffer);
+  const offers = useAppSelector(getOffers);
+  const selectedOffer = offers.find((o) => o.id === id);
   const nearOffers = useAppSelector(getNearOffers);
   const memoizedNearOffers = useMemo(() => nearOffers.slice(0, 3), [nearOffers]);
   const reviews = useAppSelector(getReviews);
@@ -89,7 +92,7 @@ export function OfferScreen() : JSX.Element {
                   {offer.bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                      Max {offer.maxAdults} adults
+                  Max {offer.maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
@@ -110,9 +113,7 @@ export function OfferScreen() : JSX.Element {
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74"
-                      alt="Host avatar"
-                    />
+                    <img className="offer__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
                     {offer.host.name}
@@ -136,8 +137,8 @@ export function OfferScreen() : JSX.Element {
           </div>
           <Map
             city={offer.city}
-            offers={memoizedNearOffers}
-            selectedOffer={undefined}
+            offers={[selectedOffer!, ...memoizedNearOffers]}
+            selectedOffer={selectedOffer}
           />
         </section>
         <div className="container">

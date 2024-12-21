@@ -8,12 +8,13 @@ import {fireEvent, render, screen} from '@testing-library/react';
 import {internet} from 'faker';
 
 describe('Component: LoginScreen', () => {
-  const component =
+  const component = (
     <MemoryRouter>
       <HelmetProvider>
         <LoginScreen />
       </HelmetProvider>
     </MemoryRouter>
+  );
   it('should render correctly', () => {
     const { withStoreComponent } = withStore(
       component,
